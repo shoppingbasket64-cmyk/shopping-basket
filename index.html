@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Shopping Basket</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
@@ -15,31 +16,32 @@
     }
 
     h1 {
-      font-size: 36px;
+      font-size: 44px;
       margin-top: 30px;
     }
 
     p {
-      font-size: 20px;
+      font-size: 26px;
       color: #333;
-      margin: 15px 0;
-    }
-
-    img {
-      width: 220px;
       margin: 20px 0;
     }
 
-    a {
-      display: inline-block;
-      font-size: 18px;
-      color: #0066cc;
-      text-decoration: none;
-      margin: 10px;
+    img {
+      width: 280px;
+      margin: 30px 0;
     }
 
-    a:hover {
-      text-decoration: underline;
+    a {
+      display: block;
+      font-size: 24px;
+      color: #0066cc;
+      text-decoration: none;
+      margin: 18px 0;
+      font-weight: bold;
+    }
+
+    .whatsapp {
+      color: #25D366;
     }
   </style>
 </head>
@@ -48,12 +50,19 @@
 
   <h1>Shopping Basket</h1>
 
-  <img src="logo.png" alt="Logo">
+  <img src="logo.png" alt="Shopping Basket Logo">
 
   <p>كل احتياجاتك من مكان واحد</p>
 
-  <a href="#">تابعنا على فيسبوك</a><br>
-  <a href="#">اطلب الآن على واتساب</a>
+  <!-- فيسبوك -->
+  <a href="https://www.facebook.com/share/1Ft53D21q9/" target="_blank">
+    تابعنا على فيسبوك
+  </a>
+
+  <!-- واتساب -->
+  <a class="whatsapp" href="https://wa.me/201551489292" target="_blank">
+    اطلب الآن على واتساب
+  </a>
 
 </body>
 </html>
