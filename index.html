@@ -2,71 +2,137 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shopping Basket</title>
 
 <style>
 body{
   font-family: Arial;
-  text-align:center;
   direction: rtl;
+  margin:0;
+  padding:0;
+  background:#f2f2f2;
+  text-align:center;
+}
+
+header{
+  background:#008000;
+  color:white;
+  padding:15px;
 }
 
 .products{
   display:flex;
   justify-content:center;
-  gap:20px;
   flex-wrap:wrap;
+  gap:20px;
+  padding:20px;
 }
 
 .product{
-  border:1px solid #ddd;
-  padding:15px;
+  background:white;
   width:200px;
+  padding:15px;
   border-radius:10px;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 button{
-  background:green;
+  background:#008000;
   color:white;
   border:none;
   padding:8px 12px;
   border-radius:6px;
   cursor:pointer;
+  margin-top:5px;
+}
+
+button:hover{
+  opacity:0.9;
 }
 
 .cart{
-  margin-top:30px;
-  border-top:2px solid #000;
-  padding-top:20px;
+  background:white;
+  margin:20px;
+  padding:20px;
+  border-radius:10px;
+}
+
+input, textarea{
+  width:90%;
+  padding:8px;
+  margin:5px 0;
+}
+
+.social{
+  margin-top:20px;
+}
+
+.facebook{
+  background:#1877f2;
+}
+.clear-btn{
+  background:red;
+}
+.remove-btn{
+  background:#999;
+  font-size:12px;
+  padding:3px 6px;
 }
 </style>
 </head>
 
 <body>
 
+<header>
 <h1>🛒 سلة التسوق</h1>
+</header>
 
 <div class="products">
 
-  <div class="product">
-    <h3>كرتونة مياه</h3>
-    <p>70 جنيه</p>
-    <button onclick="addToCart('كرتونة مياه',70)">أضف للسلة</button>
-  </div>
+<div class="product">
+<h3>كرتونة مياه</h3>
+<p>70 جنيه</p>
+<button onclick="addToCart('كرتونة مياه',70)">أضف للسلة</button>
+</div>
 
-  <div class="product">
-    <h3>أرز 1 كيلو</h3>
-    <p>25 جنيه</p>
-    <button onclick="addToCart('أرز 1 كيلو',25)">أضف للسلة</button>
-  </div>
+<div class="product">
+<h3>أرز 1 كيلو</h3>
+<p>25 جنيه</p>
+<button onclick="addToCart('أرز 1 كيلو',25)">أضف للسلة</button>
+</div>
 
 </div>
 
 <div class="cart">
-  <h2>السلة</h2>
-  <ul id="cartItems"></ul>
-  <h3 id="total">الإجمالي: 0 جنيه</h3>
-  <button onclick="sendOrder()">تأكيد الطلب</button>
+<h2>السلة</h2>
+<ul id="cartItems"></ul>
+<h3 id="total">الإجمالي: 0 جنيه</h3>
+
+<button class="clear-btn" onclick="clearCart()">🗑 تفريغ السلة</button>
+
+<h2>بيانات العميل</h2>
+
+<form id="orderForm" action="https://formsubmit.co/shoppingbasket64@gmail.com" method="POST">
+
+<input type="text" name="name" placeholder="الاسم" required>
+<input type="text" name="phone" placeholder="رقم الموبايل" required>
+<textarea name="address" placeholder="العنوان" required></textarea>
+
+<input type="hidden" name="order" id="hiddenOrder">
+<input type="hidden" name="total" id="hiddenTotal">
+
+<button type="submit">تأكيد الطلب</button>
+
+</form>
+
+<div class="social">
+<h3>تابعنا على فيسبوك</h3>
+<a href="https://www.facebook.com/share/17JtdBozy6/" target="_blank">
+<button class="facebook">👍 تابعنا</button>
+</a>
+</div>
+
 </div>
 
 <script>
@@ -83,27 +149,40 @@ function addToCart(name,price){
 function updateCart(){
   let list = document.getElementById("cartItems");
   list.innerHTML = "";
-  cart.forEach(item=>{
-    list.innerHTML += "<li>"+item.name+" - "+item.price+" جنيه</li>";
+  cart.forEach((item,index)=>{
+    list.innerHTML += `
+      <li>
+        ${item.name} - ${item.price} جنيه 
+        <button class="remove-btn" onclick="removeItem(${index})">❌</button>
+      </li>
+    `;
   });
   document.getElementById("total").innerText = "الإجمالي: " + total + " جنيه";
 }
 
-function sendOrder(){
-  if(cart.length === 0){
-    alert("السلة فاضية");
-    return;
-  }
-
-  let message = "طلب جديد:%0A";
-  cart.forEach(item=>{
-    message += "- " + item.name + " " + item.price + " جنيه%0A";
-  });
-
-  message += "الإجمالي: " + total + " جنيه";
-
-  window.open("https://wa.me/201551489292?text=" + message, "_blank");
+function removeItem(index){
+  total -= cart[index].price;
+  cart.splice(index,1);
+  updateCart();
 }
+
+function clearCart(){
+  cart = [];
+  total = 0;
+  updateCart();
+}
+
+document.getElementById("orderForm").addEventListener("submit", function(){
+
+let orderText = "";
+cart.forEach(item=>{
+orderText += item.name + " - " + item.price + " جنيه | ";
+});
+
+document.getElementById("hiddenOrder").value = orderText;
+document.getElementById("hiddenTotal").value = total + " جنيه";
+
+});
 
 </script>
 
