@@ -6,18 +6,19 @@
 <title>سلة ماركت</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#f5f5f5;direction:rtl}
+body{font-family:Arial;margin:0;background:#f2f2f2;direction:rtl}
 header{background:#2e7d32;color:white;padding:15px;text-align:center;font-size:22px}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:15px;padding:15px}
-.card{background:white;padding:10px;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);text-align:center}
+.tabs{display:flex}
+.tabs button{flex:1;padding:12px;border:none;background:#ddd;font-size:16px;cursor:pointer}
+.tabs button.active{background:#2e7d32;color:white}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:10px}
+.card{background:white;padding:10px;border-radius:10px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
 .card img{width:100%;height:120px;object-fit:cover;border-radius:10px}
-button{background:#2e7d32;color:white;border:none;padding:8px;margin-top:8px;border-radius:5px;cursor:pointer;width:100%}
-button:hover{background:#1b5e20}
-.cart-box{background:white;margin:15px;padding:15px;border-radius:10px}
-input,textarea{width:100%;padding:8px;margin-bottom:8px;border-radius:6px;border:1px solid #ccc}
-.delete-btn{background:red;margin-top:5px}
-.clear-btn{background:#555;margin-top:10px}
-.section-title{padding:0 15px;font-size:18px;font-weight:bold}
+button.add{background:#2e7d32;color:white;border:none;padding:6px;border-radius:5px;width:100%;margin-top:5px}
+.cart-box{background:white;margin:10px;padding:10px;border-radius:10px}
+input,textarea{width:100%;padding:8px;margin-bottom:6px;border-radius:6px;border:1px solid #ccc}
+.delete-btn{background:red;color:white;border:none;padding:4px;border-radius:4px;margin-top:4px}
+.clear-btn{background:#555;color:white;border:none;padding:6px;border-radius:5px;width:100%;margin-top:6px}
 </style>
 </head>
 
@@ -25,61 +26,76 @@ input,textarea{width:100%;padding:8px;margin-bottom:8px;border-radius:6px;border
 
 <header>🛒 سلة ماركت</header>
 
-<div class="section-title">🍎 الفواكه</div>
-<div class="products">
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg"><h3>تفاح</h3><p>25 جنيه</p><button onclick="addToCart('تفاح',25)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"><h3>موز</h3><p>20 جنيه</p><button onclick="addToCart('موز',20)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg"><h3>برتقال</h3><p>18 جنيه</p><button onclick="addToCart('برتقال',18)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg"><h3>فراولة</h3><p>30 جنيه</p><button onclick="addToCart('فراولة',30)">أضف إلى السلة</button></div>
-
+<div class="tabs">
+<button class="active" onclick="showTab('fruits',this)">🍎 فواكه وخضار</button>
+<button onclick="showTab('grocery',this)">🛒 بقالة</button>
 </div>
 
-<div class="section-title">🥦 الخضروات</div>
-<div class="products">
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Bright_red_tomato_and_cross_section02.jpg"><h3>طماطم</h3><p>10 جنيه</p><button onclick="addToCart('طماطم',10)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Cucumber.jpg"><h3>خيار</h3><p>12 جنيه</p><button onclick="addToCart('خيار',12)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Potato.jpg"><h3>بطاطس</h3><p>15 جنيه</p><button onclick="addToCart('بطاطس',15)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Onion_on_White.JPG"><h3>بصل</h3><p>8 جنيه</p><button onclick="addToCart('بصل',8)">أضف إلى السلة</button></div>
-
-</div>
-
-<div class="section-title">🛒 منتجات بقالة</div>
-<div class="products">
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/7/70/White_rice.jpg"><h3>أرز 1 كيلو</h3><p>35 جنيه</p><button onclick="addToCart('أرز',35)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Sunflower_oil.jpg"><h3>زيت</h3><p>60 جنيه</p><button onclick="addToCart('زيت',60)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Milk_glass.jpg"><h3>لبن</h3><p>28 جنيه</p><button onclick="addToCart('لبن',28)">أضف إلى السلة</button></div>
-
-<div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Bread.jpg"><h3>عيش</h3><p>5 جنيه</p><button onclick="addToCart('عيش',5)">أضف إلى السلة</button></div>
-
-</div>
+<div id="fruits" class="products"></div>
+<div id="grocery" class="products" style="display:none"></div>
 
 <div class="cart-box">
 <h3>السلة (<span id="count">0</span>)</h3>
 <div id="cart-items"></div>
 <hr>
-
 <input type="text" id="name" placeholder="الاسم بالكامل">
 <input type="tel" id="phone" placeholder="رقم الموبايل">
 <input type="text" id="address" placeholder="العنوان بالتفصيل">
 <textarea id="note" placeholder="ملاحظات (اختياري)"></textarea>
-
-<button onclick="sendOrder()">تأكيد الطلب</button>
-<button class="clear-btn" onclick="clearCart()">مسح السلة</button>
+<button onclick="sendOrder()" class="add">تأكيد الطلب</button>
+<button onclick="clearCart()" class="clear-btn">مسح السلة</button>
 </div>
 
 <script>
+
+let fruitsProducts = [
+{name:"تفاح",price:25,img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg"},
+{name:"موز",price:20,img:"https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"},
+{name:"برتقال",price:18,img:"https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg"},
+{name:"فراولة",price:30,img:"https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg"},
+{name:"طماطم",price:10,img:"https://upload.wikimedia.org/wikipedia/commons/8/88/Bright_red_tomato_and_cross_section02.jpg"},
+{name:"بطاطس",price:15,img:"https://upload.wikimedia.org/wikipedia/commons/6/60/Potato_and_cross_section.jpg"},
+{name:"خيار",price:12,img:"https://upload.wikimedia.org/wikipedia/commons/9/96/Cucumis_sativus_-_Köhler–s_Medizinal-Pflanzen-038.jpg"},
+{name:"بصل",price:8,img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Onion_on_White.JPG"}
+];
+
+let groceryProducts = [
+{name:"أرز",price:35,img:"https://upload.wikimedia.org/wikipedia/commons/7/70/White_rice.jpg"},
+{name:"زيت",price:60,img:"https://upload.wikimedia.org/wikipedia/commons/6/6f/Sunflower_oil.jpg"},
+{name:"سكر",price:25,img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Sugar_cubes.jpg"},
+{name:"مكرونة",price:20,img:"https://upload.wikimedia.org/wikipedia/commons/0/0e/Penne_pasta.jpg"},
+{name:"لبن",price:28,img:"https://upload.wikimedia.org/wikipedia/commons/3/36/Milk_glass.jpg"},
+{name:"جبنة",price:40,img:"https://upload.wikimedia.org/wikipedia/commons/4/4c/Cheese.jpg"},
+{name:"شاي",price:30,img:"https://upload.wikimedia.org/wikipedia/commons/7/7b/Tea_bag.jpg"},
+{name:"قهوة",price:45,img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Coffee_beans.jpg"}
+];
+
 let cart=[];
+
+function loadProducts(list,container){
+let div=document.getElementById(container);
+div.innerHTML="";
+list.forEach(p=>{
+div.innerHTML+=`
+<div class="card">
+<img src="${p.img}">
+<h4>${p.name}</h4>
+<p>${p.price} جنيه</p>
+<button class="add" onclick="addToCart('${p.name}',${p.price})">أضف للسلة</button>
+</div>`;
+});
+}
+
+loadProducts(fruitsProducts,"fruits");
+loadProducts(groceryProducts,"grocery");
+
+function showTab(id,btn){
+document.getElementById("fruits").style.display="none";
+document.getElementById("grocery").style.display="none";
+document.getElementById(id).style.display="grid";
+document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+}
 
 function addToCart(name,price){
 cart.push({name,price});
@@ -87,28 +103,24 @@ renderCart();
 }
 
 function renderCart(){
-let cartDiv=document.getElementById("cart-items");
-cartDiv.innerHTML="";
+let grouped={};
 let total=0;
-
-cart.forEach((item,index)=>{
+cart.forEach(item=>{
+if(grouped[item.name]){
+grouped[item.name].qty+=1;
+grouped[item.name].total+=item.price;
+}else{
+grouped[item.name]={qty:1,total:item.price};
+}
 total+=item.price;
-cartDiv.innerHTML+=`
-<div>${item.name} - ${item.price} جنيه
-<button class="delete-btn" onclick="removeItem(${index})">حذف</button>
-</div>`;
 });
-
+let div=document.getElementById("cart-items");
+div.innerHTML="";
+for(let item in grouped){
+div.innerHTML+=`${item} × ${grouped[item].qty} = ${grouped[item].total} جنيه<br>`;
+}
+div.innerHTML+=`<hr><strong>الإجمالي: ${total} جنيه</strong>`;
 document.getElementById("count").innerText=cart.length;
-
-if(cart.length>0){
-cartDiv.innerHTML+=`<hr><strong>الإجمالي: ${total} جنيه</strong>`;
-}
-}
-
-function removeItem(index){
-cart.splice(index,1);
-renderCart();
 }
 
 function clearCart(){
@@ -122,13 +134,8 @@ let phone=document.getElementById("phone").value;
 let address=document.getElementById("address").value;
 let note=document.getElementById("note").value;
 
-if(name==""||phone==""||address==""){
-alert("من فضلك اكتب الاسم ورقم الموبايل والعنوان");
-return;
-}
-
-if(cart.length==0){
-alert("السلة فاضية");
+if(!name||!phone||!address||cart.length==0){
+alert("اكمل البيانات والسلة الاول");
 return;
 }
 
@@ -136,15 +143,25 @@ let message="طلب جديد من سلة ماركت%0A";
 message+="الاسم: "+name+"%0A";
 message+="رقم الموبايل: "+phone+"%0A";
 message+="العنوان: "+address+"%0A";
-message+="الملاحظات: "+note+"%0A";
-message+="--------------------%0A";
+message+="الملاحظات: "+note+"%0A--------------------%0A";
 
+let grouped={};
 cart.forEach(item=>{
-message+="- "+item.name+" - "+item.price+" جنيه%0A";
+if(grouped[item.name]){
+grouped[item.name].qty+=1;
+grouped[item.name].total+=item.price;
+}else{
+grouped[item.name]={qty:1,total:item.price};
+}
 });
+
+for(let item in grouped){
+message+=item+" × "+grouped[item].qty+" = "+grouped[item].total+" جنيه%0A";
+}
 
 window.location.href="https://wa.me/201551489292?text="+message;
 }
+
 </script>
 
 </body>
