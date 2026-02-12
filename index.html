@@ -56,19 +56,29 @@ button:hover{
     background:#1565c0;
 }
 
-.cart{
-    position:fixed;
-    bottom:0;
-    width:100%;
+.cart-box{
     background:white;
-    padding:10px;
-    box-shadow:0 -2px 5px rgba(0,0,0,0.2);
+    margin:15px;
+    padding:15px;
+    border-radius:10px;
 }
 
-input{
+input, textarea{
     width:100%;
-    padding:8px;
-    margin-bottom:5px;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.delete-btn{
+    background:red;
+    margin-top:5px;
+}
+
+.clear-btn{
+    background:#555;
+    margin-top:10px;
 }
 </style>
 </head>
@@ -85,58 +95,105 @@ input{
 <img src="https://i.imgur.com/1bX5QH6.jpg">
 <h3>تفاح</h3>
 <p>25 جنيه</p>
-<button onclick="addToCart('تفاح - 25 جنيه')">أضف إلى السلة</button>
+<button onclick="addToCart('تفاح',25)">أضف إلى السلة</button>
 </div>
 
 <div class="card">
 <img src="https://i.imgur.com/8Km9tLL.jpg">
 <h3>موز</h3>
 <p>20 جنيه</p>
-<button onclick="addToCart('موز - 20 جنيه')">أضف إلى السلة</button>
-</div>
-
-<div class="card">
-<img src="https://i.imgur.com/dtXJz6v.jpg">
-<h3>برتقال</h3>
-<p>18 جنيه</p>
-<button onclick="addToCart('برتقال - 18 جنيه')">أضف إلى السلة</button>
+<button onclick="addToCart('موز',20)">أضف إلى السلة</button>
 </div>
 
 </div>
 
-<div class="cart">
-<input type="text" id="name" placeholder="اكتب اسمك">
-<input type="text" id="phone" placeholder="اكتب رقم موبايلك">
+<div class="cart-box">
+
+<h3>السلة (<span id="count">0</span>)</h3>
+<div id="cart-items"></div>
+
+<hr>
+
+<input type="text" id="name" placeholder="الاسم بالكامل">
+<input type="tel" id="phone" placeholder="رقم الموبايل">
+<input type="text" id="address" placeholder="العنوان بالتفصيل">
+<textarea id="note" placeholder="ملاحظة (اختياري)"></textarea>
+
 <button onclick="sendOrder()">تأكيد الطلب</button>
+<button class="clear-btn" onclick="clearCart()">مسح السلة</button>
+
 </div>
 
 <script>
 let cart = [];
 
-function addToCart(item){
-    cart.push(item);
-    alert("تم إضافة المنتج للسلة");
+function addToCart(name,price){
+    cart.push({name,price});
+    renderCart();
+}
+
+function renderCart(){
+    let cartDiv = document.getElementById("cart-items");
+    cartDiv.innerHTML="";
+    let total=0;
+
+    cart.forEach((item,index)=>{
+        total+=item.price;
+        cartDiv.innerHTML+=`
+        <div>
+        ${item.name} - ${item.price} جنيه
+        <button class="delete-btn" onclick="removeItem(${index})">حذف</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("count").innerText=cart.length;
+
+    if(cart.length>0){
+        cartDiv.innerHTML+=`<hr><strong>الإجمالي: ${total} جنيه</strong>`;
+    }
+}
+
+function removeItem(index){
+    cart.splice(index,1);
+    renderCart();
+}
+
+function clearCart(){
+    cart=[];
+    renderCart();
 }
 
 function sendOrder(){
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
 
-    if(name=="" || phone==""){
-        alert("من فضلك اكتب الاسم ورقم الموبايل");
+    let name=document.getElementById("name").value;
+    let phone=document.getElementById("phone").value;
+    let address=document.getElementById("address").value;
+    let note=document.getElementById("note").value;
+
+    if(name==""||phone==""||address==""){
+        alert("من فضلك اكتب الاسم ورقم الموبايل والعنوان");
         return;
     }
 
-    let message = "طلب جديد من سلة ماركت%0A";
-    message += "الاسم: " + name + "%0A";
-    message += "رقم الموبايل: " + phone + "%0A";
-    message += "الطلبات:%0A";
+    if(cart.length==0){
+        alert("السلة فاضية");
+        return;
+    }
+
+    let message="طلب جديد من سلة ماركت%0A";
+    message+="الاسم: "+name+"%0A";
+    message+="رقم الموبايل: "+phone+"%0A";
+    message+="العنوان: "+address+"%0A";
+    message+="الملاحظات: "+note+"%0A";
+    message+="--------------------%0A";
+    message+="الطلبات:%0A";
 
     cart.forEach(item=>{
-        message += "- " + item + "%0A";
+        message+="- "+item.name+" - "+item.price+" جنيه%0A";
     });
 
-    window.location.href = "https://wa.me/201551489292?text=" + message;
+    window.location.href="https://wa.me/201551489292?text="+message;
 }
 </script>
 
