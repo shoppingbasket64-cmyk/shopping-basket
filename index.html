@@ -1,68 +1,111 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>Shopping Basket</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Shopping Basket</title>
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      direction: rtl;
-    }
+<style>
+body{
+  font-family: Arial;
+  text-align:center;
+  direction: rtl;
+}
 
-    h1 {
-      font-size: 44px;
-      margin-top: 30px;
-    }
+.products{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
 
-    p {
-      font-size: 26px;
-      color: #333;
-      margin: 20px 0;
-    }
+.product{
+  border:1px solid #ddd;
+  padding:15px;
+  width:200px;
+  border-radius:10px;
+}
 
-    img {
-      width: 280px;
-      margin: 30px 0;
-    }
+button{
+  background:green;
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
 
-    a {
-      display: block;
-      font-size: 24px;
-      color: #0066cc;
-      text-decoration: none;
-      margin: 18px 0;
-      font-weight: bold;
-    }
-
-    .whatsapp {
-      color: #25D366;
-    }
-  </style>
+.cart{
+  margin-top:30px;
+  border-top:2px solid #000;
+  padding-top:20px;
+}
+</style>
 </head>
 
 <body>
 
-  <h1>Shopping Basket</h1>
+<h1>🛒 سلة التسوق</h1>
 
-  <img src="logo.png" alt="Shopping Basket Logo">
+<div class="products">
 
-  <p>كل احتياجاتك من مكان واحد</p>
+  <div class="product">
+    <h3>كرتونة مياه</h3>
+    <p>70 جنيه</p>
+    <button onclick="addToCart('كرتونة مياه',70)">أضف للسلة</button>
+  </div>
 
-  <!-- فيسبوك -->
-  <a href="https://www.facebook.com/share/1Ft53D21q9/" target="_blank">
-    تابعنا على فيسبوك
-  </a>
+  <div class="product">
+    <h3>أرز 1 كيلو</h3>
+    <p>25 جنيه</p>
+    <button onclick="addToCart('أرز 1 كيلو',25)">أضف للسلة</button>
+  </div>
 
-  <!-- واتساب -->
-  <a class="whatsapp" href="https://wa.me/201551489292" target="_blank">
-    اطلب الآن على واتساب
-  </a>
+</div>
+
+<div class="cart">
+  <h2>السلة</h2>
+  <ul id="cartItems"></ul>
+  <h3 id="total">الإجمالي: 0 جنيه</h3>
+  <button onclick="sendOrder()">تأكيد الطلب</button>
+</div>
+
+<script>
+
+let cart = [];
+let total = 0;
+
+function addToCart(name,price){
+  cart.push({name,price});
+  total += price;
+  updateCart();
+}
+
+function updateCart(){
+  let list = document.getElementById("cartItems");
+  list.innerHTML = "";
+  cart.forEach(item=>{
+    list.innerHTML += "<li>"+item.name+" - "+item.price+" جنيه</li>";
+  });
+  document.getElementById("total").innerText = "الإجمالي: " + total + " جنيه";
+}
+
+function sendOrder(){
+  if(cart.length === 0){
+    alert("السلة فاضية");
+    return;
+  }
+
+  let message = "طلب جديد:%0A";
+  cart.forEach(item=>{
+    message += "- " + item.name + " " + item.price + " جنيه%0A";
+  });
+
+  message += "الإجمالي: " + total + " جنيه";
+
+  window.open("https://wa.me/201551489292?text=" + message, "_blank");
+}
+
+</script>
 
 </body>
 </html>
