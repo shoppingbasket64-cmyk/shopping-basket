@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <title>قسم اللحوم</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لحوم</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <h1 style="text-align:center;">🥩 قسم اللحوم</h1>
+<h2>🥩 اللحوم</h2>
 
-    <div class="products">
+<div class="products">
 
-        <div class="product">
-            <h3>لحم بقري</h3>
-            <p>السعر: 320 جنيه / كيلو</p>
-            <button onclick="addToCart('لحم بقري',320)">اضف للسلة</button>
-        </div>
-
-        <div class="product">
-            <h3>لحم ضاني</h3>
-            <p>السعر: 380 جنيه / كيلو</p>
-            <button onclick="addToCart('لحم ضاني',380)">اضف للسلة</button>
-        </div>
-
-        <div class="product">
-            <h3>كفتة</h3>
-            <p>السعر: 300 جنيه / كيلو</p>
-            <button onclick="addToCart('كفتة',300)">اضف للسلة</button>
-        </div>
-
+    <div class="product">
+        <h3>فرخة كاملة - 120 جنيه</h3>
+        <button onclick="addToCart('فرخة كاملة', 120)">إضافة</button>
     </div>
 
-    <div style="text-align:center; margin-top:20px;">
-        <a href="cart.html">🛒 الذهاب إلى السلة</a>
+    <div class="product">
+        <h3>صدور فراخ - 150 جنيه</h3>
+        <button onclick="addToCart('صدور فراخ', 150)">إضافة</button>
     </div>
 
-    <script src="cart.js"></script>
+</div>
+
+<a href="cart.html">🛒 الذهاب إلى السلة</a>
+
+<script>
+function addToCart(name, price) {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existingItem = cart.find(item => item.name === name);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("تمت الإضافة إلى السلة");
+}
+</script>
 
 </body>
 </html>
