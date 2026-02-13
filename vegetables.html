@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خضروات</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  خضروات 🥦
+  <div class="cart-icon">
+    🛒 (<span id="cartCount">0</span>)
+  </div>
+</header>
+
+<div class="products">
+
+  <!-- طماطم -->
+  <div class="product-card">
+    <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337" />
+    <h4>طماطم</h4>
+    <div class="price">15 جنيه / كيلو</div>
+
+    <div class="quantity">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+
+    <button class="add-btn"
+      onclick="addProduct(this,'طماطم',15)">
+      إضافة للسلة
+    </button>
+  </div>
+
+  <!-- بطاطس -->
+  <div class="product-card">
+    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655" />
+    <h4>بطاطس</h4>
+    <div class="price">12 جنيه / كيلو</div>
+
+    <div class="quantity">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+
+    <button class="add-btn"
+      onclick="addProduct(this,'بطاطس',12)">
+      إضافة للسلة
+    </button>
+  </div>
+
+  <!-- خيار -->
+  <div class="product-card">
+    <img src="https://images.unsplash.com/photo-1604977046806-87d9e2d4d5f4" />
+    <h4>خيار</h4>
+    <div class="price">10 جنيه / كيلو</div>
+
+    <div class="quantity">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+
+    <button class="add-btn"
+      onclick="addProduct(this,'خيار',10)">
+      إضافة للسلة
+    </button>
+  </div>
+
+  <!-- بصل -->
+  <div class="product-card">
+    <img src="https://images.unsplash.com/photo-1582515073490-dc8c8b9d5f4e" />
+    <h4>بصل</h4>
+    <div class="price">8 جنيه / كيلو</div>
+
+    <div class="quantity">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+
+    <button class="add-btn"
+      onclick="addProduct(this,'بصل',8)">
+      إضافة للسلة
+    </button>
+  </div>
+
+</div>
+
+<script src="cart.js"></script>
+
+<script>
+function changeQty(btn,amount){
+  let qtySpan = btn.parentElement.querySelector(".qty");
+  let current = parseInt(qtySpan.innerText);
+  current += amount;
+  if(current < 1) current = 1;
+  qtySpan.innerText = current;
+}
+
+function addProduct(btn,name,price){
+  let qty = parseInt(
+    btn.parentElement.querySelector(".qty").innerText
+  );
+
+  addToCart(name,price,qty);
+}
+</script>
+
+</body>
+</html>
