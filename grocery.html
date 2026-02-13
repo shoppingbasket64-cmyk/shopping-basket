@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قسم البقالة</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f5f5f5;
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+
+header{
+    background:#2ecc71;
+    color:white;
+    padding:20px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:8px;
+}
+
+.price{
+    color:#27ae60;
+    font-weight:bold;
+    margin:10px 0;
+}
+
+button{
+    background:#25D366;
+    color:white;
+    border:none;
+    padding:8px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+</style>
+</head>
+
+<body>
+
+<header>🛒 قسم البقالة</header>
+
+<div class="container">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1586201375761-83865001e31c" >
+<h3>أرز 1 كيلو</h3>
+<div class="price">25 جنيه</div>
+<a href="https://wa.me/201551489292?text=عايز%20أرز%201%20كيلو">
+<button>اطلب الآن</button>
+</a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1604908176997-4318f1b0a4a3" >
+<h3>سكر 1 كيلو</h3>
+<div class="price">20 جنيه</div>
+<a href="https://wa.me/201551489292?text=عايز%20سكر%201%20كيلو">
+<button>اطلب الآن</button>
+</a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1580910051074-3eb694886505" >
+<h3>مكرونة</h3>
+<div class="price">15 جنيه</div>
+<a href="https://wa.me/201551489292?text=عايز%20مكرونة">
+<button>اطلب الآن</button>
+</a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1590080877777-2a0e9b5aef2e" >
+<h3>زيت 1 لتر</h3>
+<div class="price">45 جنيه</div>
+<a href="https://wa.me/201551489292?text=عايز%20زيت%201%20لتر">
+<button>اطلب الآن</button>
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
