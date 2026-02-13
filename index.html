@@ -3,271 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سلة ماركت</title>
+<title>ماركت الخير</title>
 
 <style>
-body{font-family:Arial;margin:0;background:#f2f2f2;direction:rtl}
+body{
+font-family:Arial;
+margin:0;
+background:#f4f4f4;
+direction:rtl;
+}
 
 header{
 background:#2e7d32;
 color:white;
-padding:15px;
+padding:20px;
 text-align:center;
-font-size:22px;
-position:sticky;
-top:0;
+font-size:26px;
 }
 
-.tabs{
-display:flex;
-background:#fff;
-}
-
-.tabs button{
-flex:1;
-padding:12px;
-border:none;
-background:#ddd;
-font-size:16px;
-cursor:pointer;
-}
-
-.tabs button.active{
-background:#2e7d32;
-color:white;
-}
-
-.products{
+.grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-gap:10px;
-padding:10px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
 }
 
 .card{
 background:white;
-padding:10px;
-border-radius:10px;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
 text-align:center;
-box-shadow:0 2px 5px rgba(0,0,0,0.1);
+text-decoration:none;
+color:black;
 }
 
 .card img{
 width:100%;
-height:140px;
+height:220px;
 object-fit:cover;
-border-radius:10px;
 }
 
-button.add{
-background:#2e7d32;
-color:white;
-border:none;
-padding:6px;
-border-radius:6px;
-width:100%;
-margin-top:5px;
+.card h3{
+padding:15px;
+margin:0;
+font-size:20px;
 }
 
-.cart-box{
-background:white;
-padding:10px;
-margin:10px;
-border-radius:10px;
-}
-
-.delete-btn{
-background:red;
-color:white;
-border:none;
-border-radius:4px;
-padding:4px 8px;
-margin-right:5px;
-}
-
-.clear-btn{
-background:#555;
-color:white;
-border:none;
-padding:6px;
-border-radius:6px;
-width:100%;
-margin-top:5px;
-}
-
-.facebook{
-display:block;
-background:#1877f2;
-color:white;
-text-align:center;
-padding:10px;
-margin:10px;
-border-radius:8px;
-text-decoration:none;
+.card:hover{
+transform:scale(1.03);
+transition:0.3s;
 }
 </style>
 </head>
 
 <body>
 
-<header>🛒 سلة ماركت (<span id="count">0</span>)</header>
+<header>🛒 سلة ماركت</header>
 
-<div class="tabs">
-<button class="active" onclick="showTab('fruits',this)">🍎 فواكه وخضار</button>
-<button onclick="showTab('grocery',this)">🛒 بقالة</button>
-<button onclick="showTab('chicken',this)">🍗 دواجن</button>
+<div class="grid">
+
+<a href="fruits.html" class="card">
+<img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf">
+<h3>فواكه وخضار طازجة</h3>
+</a>
+
+<a href="grocery.html" class="card">
+<img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
+<h3>منتجات بقالة</h3>
+</a>
+
+<a href="chicken.html" class="card">
+<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
+<h3>دواجن طازجة</h3>
+</a>
+
 </div>
-
-<div id="fruits" class="products"></div>
-<div id="grocery" class="products" style="display:none"></div>
-<div id="chicken" class="products" style="display:none"></div>
-
-<div class="cart-box">
-<h3>🛍 السلة</h3>
-<div id="cart"></div>
-<button onclick="clearCart()" class="clear-btn">🗑 مسح السلة</button>
-
-<hr>
-
-<input type="text" id="name" placeholder="الاسم بالكامل" style="width:100%;padding:8px;margin-top:5px">
-<input type="tel" id="phone" placeholder="رقم الموبايل" style="width:100%;padding:8px;margin-top:5px">
-<input type="text" id="address" placeholder="العنوان بالتفصيل" style="width:100%;padding:8px;margin-top:5px">
-
-<button onclick="sendOrder()" class="add" style="margin-top:5px">📲 تأكيد الطلب</button>
-</div>
-
-<a href="https://www.facebook.com/share/1799rYD6FX/" class="facebook">👍 تابعنا على فيسبوك</a>
-
-<script>
-
-let fruitsProducts=[
-{name:"تفاح",price:25,img:"https://picsum.photos/300?1"},
-{name:"موز",price:20,img:"https://picsum.photos/300?2"},
-{name:"طماطم",price:10,img:"https://picsum.photos/300?3"},
-{name:"بطاطس",price:15,img:"https://picsum.photos/300?4"}
-];
-
-let groceryProducts=[
-{name:"أرز",price:35,img:"https://picsum.photos/300?5"},
-{name:"سكر",price:25,img:"https://picsum.photos/300?6"},
-{name:"زيت",price:60,img:"https://picsum.photos/300?7"},
-{name:"مكرونة",price:20,img:"https://picsum.photos/300?8"}
-];
-
-let chickenProducts=[
-{name:"فراخ كاملة",price:120,img:"https://picsum.photos/300?9"},
-{name:"صدور فراخ",price:140,img:"https://picsum.photos/300?10"},
-{name:"وراك فراخ",price:110,img:"https://picsum.photos/300?11"},
-{name:"كبد وقوانص",price:90,img:"https://picsum.photos/300?12"}
-];
-
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
-
-function loadProducts(list,id){
-let div=document.getElementById(id);
-div.innerHTML="";
-list.forEach(p=>{
-div.innerHTML+=`
-<div class="card">
-<img src="${p.img}">
-<h4>${p.name}</h4>
-<p>${p.price} جنيه</p>
-<button class="add" onclick="addToCart('${p.name}',${p.price})">أضف للسلة</button>
-</div>`;
-});
-}
-
-loadProducts(fruitsProducts,"fruits");
-loadProducts(groceryProducts,"grocery");
-loadProducts(chickenProducts,"chicken");
-
-function showTab(id,btn){
-document.getElementById("fruits").style.display="none";
-document.getElementById("grocery").style.display="none";
-document.getElementById("chicken").style.display="none";
-document.getElementById(id).style.display="grid";
-document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
-btn.classList.add("active");
-}
-
-function addToCart(name,price){
-cart.push({name,price});
-localStorage.setItem("cart",JSON.stringify(cart));
-renderCart();
-}
-
-function renderCart(){
-let div=document.getElementById("cart");
-let grouped={};
-let total=0;
-
-cart.forEach(item=>{
-if(grouped[item.name]){
-grouped[item.name].qty+=1;
-grouped[item.name].total+=item.price;
-}else{
-grouped[item.name]={qty:1,total:item.price};
-}
-total+=item.price;
-});
-
-div.innerHTML="";
-for(let item in grouped){
-div.innerHTML+=`${item} × ${grouped[item].qty} = ${grouped[item].total} جنيه 
-<button class="delete-btn" onclick="removeItem('${item}')">حذف</button><br>`;
-}
-
-div.innerHTML+=`<hr><strong>الإجمالي: ${total} جنيه</strong>`;
-document.getElementById("count").innerText=cart.length;
-}
-
-function removeItem(name){
-cart=cart.filter(item=>item.name!==name);
-localStorage.setItem("cart",JSON.stringify(cart));
-renderCart();
-}
-
-function clearCart(){
-cart=[];
-localStorage.setItem("cart",JSON.stringify(cart));
-renderCart();
-}
-
-function sendOrder(){
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let address=document.getElementById("address").value;
-
-if(!name||!phone||!address||cart.length==0){
-alert("اكمل البيانات والسلة");
-return;
-}
-
-let message="طلب جديد من سلة ماركت%0A";
-message+="الاسم: "+name+"%0A";
-message+="الموبايل: "+phone+"%0A";
-message+="العنوان: "+address+"%0A------------%0A";
-
-let grouped={};
-cart.forEach(item=>{
-if(grouped[item.name]){
-grouped[item.name].qty+=1;
-grouped[item.name].total+=item.price;
-}else{
-grouped[item.name]={qty:1,total:item.price};
-}
-});
-
-for(let item in grouped){
-message+=item+" × "+grouped[item].qty+" = "+grouped[item].total+" جنيه%0A";
-}
-
-window.location.href="https://wa.me/201551489292?text="+message;
-}
-
-renderCart();
-
-</script>
 
 </body>
 </html>
