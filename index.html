@@ -3,234 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopping Basket</title>
-
+<title>سلة التسوق</title>
 <style>
-body{
-    font-family: Arial;
-    margin:0;
-    background:#f5f5f5;
-    direction: rtl;
-}
-
-header{
-    background:green;
-    color:white;
-    text-align:center;
-    padding:15px;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.container{
-    max-width:600px;
-    margin:20px auto;
-    padding:10px;
-}
-
-.product{
-    background:white;
-    padding:15px;
-    margin-bottom:15px;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-.product h3{
-    margin:0 0 10px 0;
-}
-
-.price{
-    color:green;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-button{
-    background:green;
-    color:white;
-    border:none;
-    padding:8px 15px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.whatsapp{
-    display:block;
-    text-align:center;
-    background:#25D366;
-    color:white;
-    padding:15px;
-    border-radius:12px;
-    text-decoration:none;
-    font-size:18px;
-    margin-top:20px;
-}
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
+    .product { background: #fff; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    h3 { margin: 0 0 10px 0; }
+    .price { color: green; margin-bottom: 10px; }
+    button { background: #2d8f2d; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #1f6f1f; }
+    h2 { margin-top: 30px; }
+    .whatsapp-order { display: inline-block; margin-top: 10px; background: #25D366; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px; }
 </style>
 </head>
-
 <body>
 
-<header>
-🛒 Shopping Basket
-</header>
-
-<div class="container">
+<h1>منتجات البقالة</h1>
 
 <div class="product">
-<h3>صدور فراخ</h3>
-<div class="price">120 جنيه / الكيلو</div>
-<button onclick="order('صدور فراخ')">اطلب المنتج</button>
+    <h3>طماطم</h3>
+    <div class="price">10 جنيه / الكيلو</div>
+    <button onclick="addToCart('طماطم')">اطلب المنتج</button>
 </div>
 
 <div class="product">
-<h3>لحم بقري</h3>
-<div class="price">250 جنيه / الكيلو</div>
-<button onclick="order('لحم بقري')">اطلب المنتج</button>
+    <h3>موز</h3>
+    <div class="price">15 جنيه / الكيلو</div>
+    <button onclick="addToCart('موز')">اطلب المنتج</button>
+</div>
+
+<h2>قسم البقالة 🛒</h2>
+
+<div class="product">
+    <h3>سكر</h3>
+    <div class="price">25 جنيه / الكيلو</div>
+    <button onclick="addToCart('سكر')">اطلب المنتج</button>
 </div>
 
 <div class="product">
-<h3>طماطم</h3>
-<div class="price">10 جنيه / الكيلو</div>
-<button onclick="order('طماطم')">اطلب المنتج</button>
+    <h3>أرز</h3>
+    <div class="price">30 جنيه / الكيلو</div>
+    <button onclick="addToCart('أرز')">اطلب المنتج</button>
 </div>
 
 <div class="product">
-<h3>موز</h3>
-<div class="price">15 جنيه / الكيلو</div>
-<button onclick="order('موز')">اطلب المنتج</button>
+    <h3>زيت خليط</h3>
+    <div class="price">70 جنيه / الزجاجة</div>
+    <button onclick="addToCart('زيت خليط')">اطلب المنتج</button>
 </div>
 
-    <h2 style="margin-top:30px;">🛒 قسم البقالة</h2>
-
-<div class="product">
-<h3>سكر</h3>
-<div class="price">25 جنيه / الكيلو</div>
-<button onclick="order('سكر')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>أرز</h3>
-<div class="price">30 جنيه / الكيلو</div>
-<button onclick="order('أرز')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>زيت خليط</h3>
-<div class="price">70 جنيه / زجاجة</div>
-<button onclick="order('زيت خليط')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>مكرونة</h3>
-<div class="price">15 جنيه / كيس</div>
-<button onclick="order('مكرونة')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>شاي</h3>
-<div class="price">40 جنيه / علبة</div>
-<button onclick="order('شاي')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>قهوة</h3>
-<div class="price">55 جنيه / عبوة</div>
-<button onclick="order('قهوة')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>عدس</h3>
-<div class="price">35 جنيه / الكيلو</div>
-<button onclick="order('عدس')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>فول</h3>
-<div class="price">28 جنيه / الكيلو</div>
-<button onclick="order('فول')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>صلصة</h3>
-<div class="price">12 جنيه / علبة</div>
-<button onclick="order('صلصة')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>تونة</h3>
-<div class="price">35 جنيه / علبة</div>
-<button onclick="order('تونة')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>جبنة بيضاء</h3>
-<div class="price">60 جنيه / الكيلو</div>
-<button onclick="order('جبنة بيضاء')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>جبنة رومي</h3>
-<div class="price">140 جنيه / الكيلو</div>
-<button onclick="order('جبنة رومي')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>حليب</h3>
-<div class="price">30 جنيه / لتر</div>
-<button onclick="order('حليب')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>زبادي</h3>
-<div class="price">6 جنيه / علبة</div>
-<button onclick="order('زبادي')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>بسكويت</h3>
-<div class="price">10 جنيه / عبوة</div>
-<button onclick="order('بسكويت')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>مربى</h3>
-<div class="price">25 جنيه / برطمان</div>
-<button onclick="order('مربى')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>طحينة</h3>
-<div class="price">50 جنيه / عبوة</div>
-<button onclick="order('طحينة')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>خل</h3>
-<div class="price">12 جنيه / زجاجة</div>
-<button onclick="order('خل')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>ملح</h3>
-<div class="price">5 جنيه / كيس</div>
-<button onclick="order('ملح')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-<h3>مسحوق غسيل</h3>
-<div class="price">90 جنيه / عبوة</div>
-<button onclick="order('مسحوق غسيل')">اطلب المنتج</button>
-</div>
-
-<a class="whatsapp" href="https://wa.me/201551489292" target="_blank">
-اطلب الآن على واتساب
-</a>
-
-</div>
+<a href="#" class="whatsapp-order" onclick="sendOrder()">أرسل السلة على واتساب</a>
 
 <script>
-
 let cart = [];
 
 function addToCart(product){
@@ -244,18 +67,16 @@ function sendOrder(){
         return;
     }
 
-    let message = "طلب جديد:%0A";
-
+    let message = "طلب جديد:\n";
     for(let i = 0; i < cart.length; i++){
-        message += "- " + cart[i] + "%0A";
+        message += "- " + cart[i] + "\n";
     }
 
-    let phone = "201551489292";
-    let url = "https://wa.me/" + phone + "?text=" + message;
+    let phone = "201551489292"; // رقمك على واتساب
+    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
 
     window.open(url, "_blank");
 }
-
 </script>
 
 </body>
