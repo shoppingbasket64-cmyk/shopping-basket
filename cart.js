@@ -1,45 +1,39 @@
-function changeQty(name, price, amount){
-
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-let item = cart.find(p => p.name === name);
+function updateCartCount() {
+  let count = 0;
 
-if(item){
-item.quantity += amount;
-if(item.quantity <= 0){
-cart = cart.filter(p => p.name !== name);
-}
-}else{
-if(amount > 0){
-cart.push({name:name, price:price, quantity:1});
-}
-}
+  cart.forEach(function(item) {
+    count += item.quantity;
+  });
 
-localStorage.setItem("cart", JSON.stringify(cart));
-updateCartCount();
-updateDisplay(name);
+  let cartCount = document.getElementById("cartCount");
+
+  if (cartCount) {
+    cartCount.innerText = count;
+  }
 }
 
-function updateDisplay(name){
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let item = cart.find(p => p.name === name);
-let qty = item ? item.quantity : 0;
+function addToCart(name, price, quantity) {
 
-let el = document.getElementById(name + "-qty");
-if(el) el.innerText = qty;
+  let existing = cart.find(function(item) {
+    return item.name === name;
+  });
+
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({
+      name: name,
+      price: price,
+      quantity: quantity
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
 }
 
-function updateCartCount(){
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let total = 0;
-cart.forEach(i => total += i.quantity);
-
-let el = document.getElementById("cartCount");
-if(el) el.innerText = total;
-}
-
-window.onload = function(){
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cart.forEach(item => updateDisplay(item.name));
-updateCartCount();
-}
+document.addEventListener("DOMContentLoaded", function() {
+  updateCartCount();
+});
