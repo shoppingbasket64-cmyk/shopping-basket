@@ -1,173 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سلة المشتريات</title>
-
-<style>
-body { font-family: Arial; background:#f5f5f5; }
-.container {
-    max-width:500px;
-    margin:30px auto;
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-h2 { text-align:center; }
-select,input,button {
-    width:100%;
-    padding:10px;
-    margin-top:10px;
-    border-radius:8px;
-    border:1px solid #ccc;
-}
-button {
-    background:green;
-    color:white;
-    border:none;
-    font-weight:bold;
-}
-.total { font-weight:bold; margin-top:10px; }
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h2>🛒 سلة المشتريات</h2>
-
-<div id="cartItems"></div>
-
-<p class="total">إجمالي المنتجات: <span id="productsTotal">0</span> جنيه</p>
-
-<label>اختر منطقتك داخل مدينة نصر:</label>
-<select id="area">
-<option value="">-- اختر المنطقة --</option>
-
-<!-- 40 جنيه -->
-<option value="40">الحي السادس (40)</option>
-<option value="40">جاردينيا (40)</option>
-<option value="40">يوسف عباس (40)</option>
-<option value="40">تاج سيتي (40)</option>
-<option value="40">تاج سلطان (40)</option>
-<option value="40">طريق النصر (40)</option>
-
-<!-- 30 جنيه -->
-<option value="30">ذاكر حسين (30)</option>
-<option value="30">الميثاق (30)</option>
-<option value="30">شارع الطاقة (30)</option>
-<option value="30">مساكن الشروق (30)</option>
-<option value="30">النادي الأهلي (30)</option>
-<option value="30">حسن المأمون (30)</option>
-<option value="30">حافظ رمضان (30)</option>
-<option value="30">الحي السابع (30)</option>
-<option value="30">حي السفارات (30)</option>
-<option value="30">الحي الثامن (30)</option>
-<option value="30">المنطقة التاسعة (30)</option>
-<option value="30">زهراء مدينة نصر (30)</option>
-
-<!-- 20 جنيه -->
-<option value="20">صقر قريش (20)</option>
-<option value="20">عمارات أطلس (20)</option>
-<option value="20">المنطقة العاشرة (20)</option>
-<option value="20">أحمد الزمر (20)</option>
-
-</select>
-
-<p class="total">خدمة التوصيل: <span id="deliveryFee">0</span> جنيه</p>
-<p class="total">الإجمالي النهائي: <span id="finalTotal">0</span> جنيه</p>
-
-<hr>
-
-<input type="text" id="name" placeholder="الاسم">
-<input type="tel" id="phone" placeholder="رقم الهاتف">
-<input type="text" id="address" placeholder="العنوان بالتفصيل">
-
-<button onclick="sendOrder()">إرسال الطلب</button>
-<button onclick="clearCart()">مسح السلة</button>
-
-</div>
-
-<script>
-
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let cartDiv = document.getElementById("cartItems");
-let total = 0;
-
-cart.forEach(item => {
-    let p = document.createElement("p");
-    p.innerText = item.name + " × " + item.quantity + " = " + (item.price * item.quantity) + " جنيه";
-    cartDiv.appendChild(p);
-    total += item.price * item.quantity;
-});
-
-document.getElementById("productsTotal").innerText = total;
-
-let area = document.getElementById("area");
-let deliverySpan = document.getElementById("deliveryFee");
-let finalSpan = document.getElementById("finalTotal");
-
-let delivery = 0;
-
-area.addEventListener("change", function(){
-    delivery = parseInt(this.value) || 0;
-    deliverySpan.innerText = delivery;
-    finalSpan.innerText = total + delivery;
-});
-
-function sendOrder(){
-
-    let name = document.getElementById("name").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let address = document.getElementById("address").value.trim();
-
-    if(!name || !phone || !address){
-        alert("من فضلك املى كل البيانات");
-        return;
-    }
-
-    if(area.value === ""){
-        alert("من فضلك اختر المنطقة");
-        return;
-    }
-
-    if(cart.length === 0){
-        alert("السلة فاضية");
-        return;
-    }
-
-    let finalTotal = total + delivery;
-    let selectedArea = area.options[area.selectedIndex].text;
-
-    let itemsText = "";
-    cart.forEach(item=>{
-        itemsText += item.name + " × " + item.quantity + "\n";
-    });
-
-    let message =
-    "طلب جديد:\n\n" +
-    itemsText + "\n" +
-    "الاسم: " + name + "\n" +
-    "الهاتف: " + phone + "\n" +
-    "العنوان: " + address + "\n" +
-    "المنطقة: " + selectedArea + "\n\n" +
-    "إجمالي المنتجات: " + total + " جنيه\n" +
-    "التوصيل: " + delivery + " جنيه\n" +
-    "الإجمالي النهائي: " + finalTotal + " جنيه";
-
-    let url = "https://wa.me/201551489292?text=" + encodeURIComponent(message);
-    window.open(url, "_blank");
-}
-
-function clearCart(){
-    localStorage.removeItem("cart");
-    location.reload();
-}
-
-</script>
-
-</body>
-</html>
