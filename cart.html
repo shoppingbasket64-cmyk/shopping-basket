@@ -3,81 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>السلة</title>
+<title>سلة المشتريات</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="cart.js"></script>
 
 <style>
-body{
-    font-family: Arial;
-    background:#f5f5f5;
-    margin:0;
-    padding:20px;
-    text-align:center;
-}
-
-h2{
-    margin-bottom:20px;
-}
-
-.cart-item{
-    background:white;
-    padding:10px;
-    margin:10px 0;
-    border-radius:8px;
-    box-shadow:0 2px 6px rgba(0,0,0,0.1);
-}
-
-button{
-    padding:8px 15px;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    margin:5px;
-}
-
-.send-btn{
-    background:#25D366;
-    color:white;
-}
-
-.clear-btn{
-    background:red;
-    color:white;
-}
-
-input, select{
-    width:90%;
-    padding:10px;
-    margin:8px 0;
-    border-radius:5px;
-    border:1px solid #ccc;
+.empty{
+text-align:center;
+padding:30px;
+font-size:18px;
+color:#777;
 }
 </style>
+
 </head>
 
 <body>
 
-<h2>🛒 سلة المشتريات</h2>
+<header>
+  <div>سلة المشتريات</div>
+  <a href="index.html" class="cart-icon">⬅ الرجوع</a>
+</header>
 
-<div id="cartItems"></div>
+<div class="cart-container">
 
-<h3>بيانات العميل</h3>
+  <div id="cartItems"></div>
 
-<input type="text" id="customerName" placeholder="اكتب اسمك">
-<input type="text" id="customerPhone" placeholder="رقم التليفون">
-<input type="text" id="customerAddress" placeholder="العنوان بالكامل">
+  <div class="total-box" id="totalBox">
+    الإجمالي: 0 جنيه
+  </div>
 
-<select id="paymentMethod">
-<option value="">اختر طريقة الدفع</option>
-<option value="كاش عند الاستلام">كاش عند الاستلام</option>
-<option value="فودافون كاش">فودافون كاش</option>
-</select>
+  <h3 style="margin-top:25px;">بيانات العميل</h3>
 
-<br>
+  <input type="text" id="custName" placeholder="اسم العميل">
+  <input type="text" id="custPhone" placeholder="رقم التليفون">
+  <input type="text" id="custAddress" placeholder="العنوان بالتفصيل">
 
-<button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
-<button class="clear-btn" onclick="clearCart()">تفريغ السلة</button>
+  <button class="send-btn" onclick="sendOrder()">
+    إرسال الطلب عبر واتساب
+  </button>
 
-<script src="cart.js"></script>
+  <button class="send-btn" 
+          style="background:#d32f2f;margin-top:10px;" 
+          onclick="clearCart()">
+    إفراغ السلة
+  </button>
+
+</div>
+
+<script>
+
+function loadCart(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let box = document.getElementById("cartItems");
+let total = 0;
+
+box.innerHTML = "";
+
+if(cart.length === 0){
+box.innerHTML = "<div class='empty'>السلة فارغة</div>";
+document.getElementById("totalBox").innerText = "الإجمالي: 0 جنيه";
+return;
+}
+
+cart.forEach(item => {
+
+let itemTotal = item.price * item.quantity;
+total += itemTotal;
+
+box.innerHTML += `
+<div class="cart-item">
+  <div>
+    <strong>${item.name}</strong><br>
+    ${item.quantity} × ${item.price} جنيه
+  </div>
+  <div>
+    ${itemTotal} جنيه
+  </div>
+</div>
+`;
+
+});
+
+document.getElementById("totalBox").innerText = "الإجمالي: " + total + " جنيه";
+}
+
+function sendOrder(){
+
+let name = document.getElementById("custName").value.trim();
+let phone = document.getElementById("custPhone").value.trim();
+let address = document.getElementById("custAddress").value.trim();
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+if(cart.length === 0){
+alert("السلة فارغة");
+return;
+}
+
+if(!name || !phone || !address){
+alert("من فضلك املأ بياناتك كاملة");
+return;
+}
+
+let totalText = document.getElementById("totalBox").innerText;
+
+let message = "🛒 طلب جديد من سلة ماركت:\n\n";
+
+cart.forEach(item=>{
+message += `${item.name} × ${item.quantity}\n`;
+});
+
+message += `\n${totalText}\n\n`;
+message += `👤 الاسم: ${name}\n`;
+message += `📞 التليفون: ${phone}\n`;
+message += `📍 العنوان: ${address}`;
+
+let url = "https://wa.me/201551489292?text=" + encodeURIComponent(message);
+
+window.open(url, "_blank");
+}
+
+function clearCart(){
+localStorage.removeItem("cart");
+loadCart();
+updateCartCount();
+}
+
+loadCart();
+
+</script>
 
 </body>
 </html>
