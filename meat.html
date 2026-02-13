@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قسم اللحوم</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1 style="text-align:center;">🥩 قسم اللحوم</h1>
+
+    <div class="products">
+
+        <div class="product">
+            <h3>لحم بقري</h3>
+            <p>السعر: 320 جنيه / كيلو</p>
+            <button onclick="addToCart('لحم بقري',320)">اضف للسلة</button>
+        </div>
+
+        <div class="product">
+            <h3>لحم ضاني</h3>
+            <p>السعر: 380 جنيه / كيلو</p>
+            <button onclick="addToCart('لحم ضاني',380)">اضف للسلة</button>
+        </div>
+
+        <div class="product">
+            <h3>كفتة</h3>
+            <p>السعر: 300 جنيه / كيلو</p>
+            <button onclick="addToCart('كفتة',300)">اضف للسلة</button>
+        </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="cart.html">🛒 الذهاب إلى السلة</a>
+    </div>
+
+    <script src="cart.js"></script>
+
+</body>
+</html>
