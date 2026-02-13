@@ -22,6 +22,17 @@ header{
     font-weight:bold;
 }
 
+.cart-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:black;
+    color:white;
+    padding:8px 12px;
+    border-radius:20px;
+    text-decoration:none;
+}
+
 .container{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -36,13 +47,6 @@ header{
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
 
-.card img{
-    width:100%;
-    height:120px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
 .price{
     color:#27ae60;
     font-weight:bold;
@@ -50,63 +54,51 @@ header{
 }
 
 button{
-    background:#25D366;
+    background:#2ecc71;
     color:white;
     border:none;
     padding:8px 15px;
     border-radius:5px;
     cursor:pointer;
 }
-
-button:hover{
-    opacity:0.9;
-}
 </style>
 </head>
 
 <body>
+
+<a href="cart.html" class="cart-btn">🛒 السلة</a>
 
 <header>🛒 قسم البقالة</header>
 
 <div class="container">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1586201375761-83865001e31c" >
 <h3>أرز 1 كيلو</h3>
 <div class="price">25 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20أرز%201%20كيلو">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('أرز 1 كيلو',25)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1604908176997-4318f1b0a4a3" >
 <h3>سكر 1 كيلو</h3>
 <div class="price">20 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20سكر%201%20كيلو">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('سكر 1 كيلو',20)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1580910051074-3eb694886505" >
 <h3>مكرونة</h3>
 <div class="price">15 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20مكرونة">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('مكرونة',15)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1590080877777-2a0e9b5aef2e" >
 <h3>زيت 1 لتر</h3>
 <div class="price">45 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20زيت%201%20لتر">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('زيت 1 لتر',45)">أضف للسلة</button>
 </div>
 
 </div>
+
+<script src="cart.js"></script>
 
 </body>
 </html>
