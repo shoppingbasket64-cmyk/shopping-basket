@@ -1,45 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دواجن</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<h1>دواجن 🍗</h1>
-
-<div class="container">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1604908554027-1b53b0b3d0f0">
-<h3>فرخة كاملة - 120 جنيه</h3>
-<button class="add-btn" onclick="addToCart('فرخة كاملة',120)">إضافة</button>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
-<h3>صدور فراخ - 150 جنيه</h3>
-<button class="add-btn" onclick="addToCart('صدور فراخ',150)">إضافة</button>
-</div>
-
-</div>
-
-<div class="cart">
-<h2>السلة</h2>
-<div id="cartItems"></div>
-<div id="total"></div>
-</div>
-
-<div class="customer">
-<h3>بيانات العميل</h3>
-<input id="name" placeholder="اسم العميل">
-<input id="phone" placeholder="رقم العميل">
-<input id="address" placeholder="العنوان">
-<button class="whatsapp-btn" onclick="sendOrder()">إرسال الطلب</button>
-</div>
-
-<script src="cart.js"></script>
-</body>
-</html>
