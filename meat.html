@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>قسم اللحوم - سلة ماركت</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <h1>🥩 قسم اللحوم</h1>
+  <a href="index.html" class="back-btn">الرجوع للرئيسية</a>
+</header>
+
+<section class="products">
+
+  <!-- منتج -->
+  <div class="product-card">
+    <h3>لحم بلدي</h3>
+    <p>السعر: 320 جنيه / كيلو</p>
+    <div class="qty-box">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+    <button class="add-btn" onclick="addToCart('لحم بلدي',320,this)">إضافة للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <h3>لحم مفروم</h3>
+    <p>السعر: 300 جنيه / كيلو</p>
+    <div class="qty-box">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+    <button class="add-btn" onclick="addToCart('لحم مفروم',300,this)">إضافة للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <h3>كفتة</h3>
+    <p>السعر: 280 جنيه / كيلو</p>
+    <div class="qty-box">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+    <button class="add-btn" onclick="addToCart('كفتة',280,this)">إضافة للسلة</button>
+  </div>
+
+  <div class="product-card">
+    <h3>ستيك</h3>
+    <p>السعر: 350 جنيه / كيلو</p>
+    <div class="qty-box">
+      <button onclick="changeQty(this,-1)">-</button>
+      <span class="qty">1</span>
+      <button onclick="changeQty(this,1)">+</button>
+    </div>
+    <button class="add-btn" onclick="addToCart('ستيك',350,this)">إضافة للسلة</button>
+  </div>
+
+</section>
+
+<script src="cart.js"></script>
+
+</body>
+</html>
