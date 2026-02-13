@@ -1,72 +1,82 @@
+// تحميل السلة من التخزين
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function addToCart(name, price){
-let existing = cart.find(item => item.name === name);
-if(existing){
-existing.qty += 1;
-}else{
-cart.push({name, price, qty:1});
-}
-saveCart();
-renderCart();
-}
+let cartContainer = document.getElementById("cartItems");
+let total = 0;
 
-function removeItem(index){
-cart.splice(index,1);
-saveCart();
-renderCart();
-}
+// عرض المنتجات
+cart.forEach(item => {
+    let itemDiv = document.createElement("p");
+    itemDiv.textContent = item.name + " × " + item.quantity + " = " + (item.price * item.quantity) + " جنيه";
+    cartContainer.appendChild(itemDiv);
 
-function saveCart(){
-localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function renderCart(){
-let cartDiv = document.getElementById("cartItems");
-if(!cartDiv) return;
-
-cartDiv.innerHTML="";
-let total=0;
-
-cart.forEach((item,index)=>{
-let itemTotal=item.price*item.qty;
-total+=itemTotal;
-
-cartDiv.innerHTML+=`
-<div style="display:flex;justify-content:space-between;margin-bottom:5px;">
-<span>${item.name} × ${item.qty}</span>
-<span>${itemTotal} ج</span>
-<button class="delete-btn" onclick="removeItem(${index})">حذف</button>
-</div>
-`;
+    total += item.price * item.quantity;
 });
 
-let totalDiv=document.getElementById("total");
-if(totalDiv){
-totalDiv.innerText="الإجمالي: "+total+" جنيه";
-}
-}
+// عرض إجمالي المنتجات
+document.getElementById("productsTotal").innerText = total;
 
-function sendOrder(){
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let address=document.getElementById("address").value;
+// اختيار المنطقة
+let areaSelect = document.getElementById("area");
+let deliverySpan = document.getElementById("deliveryFee");
+let finalTotalSpan = document.getElementById("finalTotal");
 
-if(cart.length===0||!name||!phone||!address){
-alert("املأ البيانات وأضف منتجات");
-return;
-}
+let deliveryFee = 0;
 
-let message="طلب جديد:%0A";
-cart.forEach(item=>{
-message+=item.name+" × "+item.qty+"%0A";
+areaSelect.addEventListener("change", function () {
+    deliveryFee = parseInt(this.value) || 0;
+    deliverySpan.innerText = deliveryFee;
+    finalTotalSpan.innerText = total + deliveryFee;
 });
 
-message+="%0Aالاسم: "+name;
-message+="%0Aالهاتف: "+phone;
-message+="%0Aالعنوان: "+address;
+// إرسال الطلب
+document.getElementById("sendOrder").addEventListener("click", function () {
 
-window.open("https://wa.me/201551489292?text="+message);
-}
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let address = document.getElementById("address").value.trim();
 
-window.onload=renderCart;
+    if (name === "" || phone === "" || address === "") {
+        alert("من فضلك املى كل البيانات");
+        return;
+    }
+
+    if (areaSelect.value === "") {
+        alert("من فضلك اختر المنطقة");
+        return;
+    }
+
+    if (cart.length === 0) {
+        alert("السلة فاضية");
+        return;
+    }
+
+    let selectedArea = areaSelect.options[areaSelect.selectedIndex].text;
+    let finalTotal = total + deliveryFee;
+
+    let cartText = "";
+    cart.forEach(item => {
+        cartText += item.name + " × " + item.quantity + "\n";
+    });
+
+    let message =
+        "طلب جديد:\n\n" +
+        cartText + "\n" +
+        "الاسم: " + name + "\n" +
+        "الهاتف: " + phone + "\n" +
+        "العنوان: " + address + "\n" +
+        "المنطقة: " + selectedArea + "\n\n" +
+        "إجمالي المنتجات: " + total + " جنيه\n" +
+        "خدمة التوصيل: " + deliveryFee + " جنيه\n" +
+        "الإجمالي النهائي: " + finalTotal + " جنيه";
+
+    let whatsappURL = "https://wa.me/201551489292?text=" + encodeURIComponent(message);
+
+    window.open(whatsappURL, "_blank");
+});
+
+// مسح السلة
+document.getElementById("clear").addEventListener("click", function () {
+    localStorage.removeItem("cart");
+    location.reload();
+});
