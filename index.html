@@ -4,41 +4,96 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shopping Basket</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f2f2f2;
+    text-align:center;
+}
+
+h1{
+    margin:30px 0;
+    font-size:28px;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    overflow:hidden;
+    text-decoration:none;
+    color:black;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.card h2{
+    padding:15px;
+    font-size:20px;
+}
+
+.facebook-btn{
+    display:inline-block;
+    margin:30px auto 40px;
+    padding:15px 25px;
+    background:#1877f2;
+    color:#fff;
+    border-radius:10px;
+    text-decoration:none;
+    font-size:18px;
+}
+</style>
 </head>
+
 <body>
 
-<h1 class="title">Shopping Basket 🛒</h1>
+<h1>🛒 Shopping Basket</h1>
 
 <div class="container">
 
-<a href="vegetables.html" class="card">
-<img src="https://images.unsplash.com/photo-1542838132-92c53300491e">
-<h3>خضروات طازة 🥦</h3>
-</a>
-
 <a href="fruits.html" class="card">
-<img src="https://images.unsplash.com/photo-1574226516831-e1dff420e42e">
-<h3>فواكه 🍎</h3>
+<img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=800&q=60">
+<h2>🍎 فواكه</h2>
 </a>
 
-<a href="grocery.html" class="card">
-<img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f">
-<h3>بقالة 🛒</h3>
+<a href="vegetables.html" class="card">
+<img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=60">
+<h2>🥦 خضروات طازة</h2>
 </a>
 
 <a href="chicken.html" class="card">
-<img src="https://images.unsplash.com/photo-1604908554027-1b53b0b3d0f0">
-<h3>دواجن 🍗</h3>
+<img src="https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=800&q=60">
+<h2>🍗 دواجن</h2>
+</a>
+
+<a href="grocery.html" class="card">
+<img src="https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=800&q=60">
+<h2>🛒 بقالة</h2>
 </a>
 
 </div>
 
-<div class="facebook">
-<a href="https://www.facebook.com/share/1GaJuScEhn/" target="_blank">
+<a class="facebook-btn" href="https://www.facebook.com/share/1GaJuScEhn/" target="_blank">
 تابعنا على فيسبوك
 </a>
-</div>
 
 </body>
 </html>
