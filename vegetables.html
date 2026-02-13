@@ -6,73 +6,40 @@
 <title>خضروات</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-  خضروات 🥦
-  <div class="cart-icon">
-    🛒 (<span id="cartCount">0</span>)
-  </div>
-</header>
+<h1>خضروات 🥦</h1>
 
-<div class="products">
+<div class="container">
 
-  <!-- طماطم -->
-  <div class="product-card">
-    <img src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337" />
-    <h4>طماطم</h4>
-    <div class="price">15 جنيه / كيلو</div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1582515073490-dc0c1a39a7a9">
+<h3>طماطم - 10 جنيه</h3>
+<button class="add-btn" onclick="addToCart('طماطم',10)">إضافة</button>
+</div>
 
-    <div class="quantity">
-      <button onclick="changeQty(this,-1)">-</button>
-      <span class="qty">1</span>
-      <button onclick="changeQty(this,1)">+</button>
-    </div>
-
-    <button class="add-btn"
-      onclick="addProduct(this,'طماطم',15)">
-      إضافة للسلة
-    </button>
-  </div>
-
-  <!-- بطاطس -->
-  <div class="product-card">
-    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655" />
-    <h4>بطاطس</h4>
-    <div class="price">12 جنيه / كيلو</div>
-
-    <div class="quantity">
-      <button onclick="changeQty(this,-1)">-</button>
-      <span class="qty">1</span>
-      <button onclick="changeQty(this,1)">+</button>
-    </div>
-
-    <button class="add-btn"
-      onclick="addProduct(this,'بطاطس',12)">
-      إضافة للسلة
-    </button>
-  </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1603048719539-9ecb8c3d3d4f">
+<h3>بطاطس - 8 جنيه</h3>
+<button class="add-btn" onclick="addToCart('بطاطس',8)">إضافة</button>
+</div>
 
 </div>
 
+<div class="cart">
+<h2>السلة</h2>
+<div id="cartItems"></div>
+<div id="total"></div>
+</div>
+
+<div class="customer">
+<h3>بيانات العميل</h3>
+<input id="name" placeholder="اسم العميل">
+<input id="phone" placeholder="رقم العميل">
+<input id="address" placeholder="العنوان">
+<button class="whatsapp-btn" onclick="sendOrder()">إرسال الطلب</button>
+</div>
+
 <script src="cart.js"></script>
-
-<script>
-function changeQty(btn, amount) {
-  let qtySpan = btn.parentElement.querySelector(".qty");
-  let current = parseInt(qtySpan.innerText);
-  current += amount;
-  if (current < 1) current = 1;
-  qtySpan.innerText = current;
-}
-
-function addProduct(btn, name, price) {
-  let productCard = btn.closest(".product-card");
-  let qty = parseInt(productCard.querySelector(".qty").innerText);
-  addToCart(name, price, qty);
-}
-</script>
-
 </body>
 </html>
