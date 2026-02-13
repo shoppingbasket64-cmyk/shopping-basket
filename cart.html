@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سلة المشتريات</title>
+<title>السلة</title>
 
 <style>
 body{
@@ -18,34 +18,38 @@ h2{
     margin-bottom:20px;
 }
 
-#cart-items{
-    margin-bottom:20px;
-}
-
-.item{
+.cart-item{
     background:white;
     padding:10px;
     margin:10px 0;
     border-radius:8px;
-    box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
 }
 
 button{
     padding:8px 15px;
-    margin:5px;
     border:none;
     border-radius:5px;
     cursor:pointer;
+    margin:5px;
 }
 
-.send{
+.send-btn{
     background:#25D366;
     color:white;
 }
 
-.clear{
+.clear-btn{
     background:red;
     color:white;
+}
+
+input, select{
+    width:90%;
+    padding:10px;
+    margin:8px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
 }
 </style>
 </head>
@@ -54,10 +58,24 @@ button{
 
 <h2>🛒 سلة المشتريات</h2>
 
-<div id="cart-items"></div>
+<div id="cartItems"></div>
 
-<button class="send" onclick="sendOrder()">إرسال الطلب على واتساب</button>
-<button class="clear" onclick="clearCart()">تفريغ السلة</button>
+<h3>بيانات العميل</h3>
+
+<input type="text" id="customerName" placeholder="اكتب اسمك">
+<input type="text" id="customerPhone" placeholder="رقم التليفون">
+<input type="text" id="customerAddress" placeholder="العنوان بالكامل">
+
+<select id="paymentMethod">
+<option value="">اختر طريقة الدفع</option>
+<option value="كاش عند الاستلام">كاش عند الاستلام</option>
+<option value="فودافون كاش">فودافون كاش</option>
+</select>
+
+<br>
+
+<button class="send-btn" onclick="sendOrder()">إرسال الطلب</button>
+<button class="clear-btn" onclick="clearCart()">تفريغ السلة</button>
 
 <script src="cart.js"></script>
 
