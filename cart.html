@@ -2,139 +2,58 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سلة المشتريات</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ربط ملف التنسيق -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* توسيط صفحة السلة */
-        .cart-container {
-            max-width: 500px;
-            margin: 20px auto;
-            background: #ffffff;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        /* توسيط العناوين */
-        .cart-container h2,
-        .cart-container h3 {
-            text-align: center;
-        }
-
-        /* تنسيق العناصر */
-        .cart-item {
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            text-align: center;
-        }
-
-        /* الإجمالي */
-        .total {
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-
-        /* تنسيق زر الإرسال */
-        .cart-container button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 8px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .cart-container button#clear {
-            background-color: #f44336;
-        }
-
-        input {
-            width: 90%;
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
-    </style>
 </head>
+
 <body>
-    <div class="cart-container">
-        <h2>سلة المشتريات</h2>
 
-        <div id="cart-items">
-            <!-- العناصر هتتضاف هنا بالـ JS -->
-        </div>
+<div class="cart-container">
 
-        <div class="total">
-            الإجمالي: <span id="total-price">0</span> جنيه
-        </div>
+    <h2>🛒 سلة المشتريات</h2>
 
-        <h3>بيانات العميل</h3>
-        <input type="text" id="client-name" placeholder="اسم العميل">
-        <input type="text" id="client-phone" placeholder="رقم التليفون">
-        <input type="text" id="client-address" placeholder="العنوان بالتفصيل">
+    <!-- عرض المنتجات -->
+    <div id="cartItems"></div>
 
-        <button id="send-order">إرسال الطلب عبر واتساب</button>
-        <button id="clear">إفراغ السلة</button>
-    </div>
+    <p><strong>إجمالي المنتجات:</strong> 
+        <span id="productsTotal">0</span> جنيه
+    </p>
 
-    <script>
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    <!-- اختيار المنطقة -->
+    <label>اختر المنطقة:</label>
+    <select id="area">
+        <option value="">-- اختر المنطقة --</option>
+        <option value="20">مدينة نصر (20 جنيه)</option>
+        <option value="30">مصر الجديدة (30 جنيه)</option>
+        <option value="40">التجمع (40 جنيه)</option>
+    </select>
 
-        function renderCart() {
-            const cartItems = document.getElementById("cart-items");
-            cartItems.innerHTML = "";
-            let total = 0;
+    <p><strong>خدمة التوصيل:</strong> 
+        <span id="deliveryFee">0</span> جنيه
+    </p>
 
-            cart.forEach(item => {
-                const div = document.createElement("div");
-                div.className = "cart-item";
-                div.innerHTML = `
-                    ${item.name} <br>
-                    ${item.price} × ${item.qty} = ${item.price * item.qty} جنيه
-                `;
-                cartItems.appendChild(div);
-                total += item.price * item.qty;
-            });
+    <p><strong>الإجمالي النهائي:</strong> 
+        <span id="finalTotal">0</span> جنيه
+    </p>
 
-            document.getElementById("total-price").innerText = total;
-        }
+    <hr>
 
-        renderCart();
+    <!-- بيانات العميل -->
+    <input type="text" id="name" placeholder="الاسم">
+    <input type="tel" id="phone" placeholder="رقم الهاتف">
+    <input type="text" id="address" placeholder="العنوان بالتفصيل">
 
-        document.getElementById("clear").addEventListener("click", () => {
-            cart = [];
-            localStorage.setItem("cart", JSON.stringify(cart));
-            renderCart();
-        });
+    <!-- الأزرار -->
+    <button id="sendOrder">إرسال الطلب</button>
+    <button id="clear">مسح السلة</button>
 
-        document.getElementById("send-order").addEventListener("click", () => {
-            const name = document.getElementById("client-name").value;
-            const phone = document.getElementById("client-phone").value;
-            const address = document.getElementById("client-address").value;
+</div>
 
-            if (!name || !phone || !address || cart.length === 0) {
-                alert("من فضلك املأ كل البيانات أو اضف منتجات للسلة");
-                return;
-            }
+<!-- ربط ملف الجافاسكريبت -->
+<script src="cart.js"></script>
 
-            let message = `طلب جديد:%0A`;
-            cart.forEach(item => {
-                message += `${item.name} × ${item.qty} = ${item.price * item.qty} جنيه%0A`;
-            });
-            message += `الإجمالي: ${cart.reduce((acc, i) => acc + i.price * i.qty, 0)} جنيه%0A`;
-            message += `اسم العميل: ${name}%0Aرقم التليفون: ${phone}%0Aالعنوان: ${address}`;
-
-            const whatsappURL = `https://wa.me/20${phone}?text=${message}`;
-            window.open(whatsappURL, "_blank");
-        });
-    </script>
 </body>
 </html>
