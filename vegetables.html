@@ -3,43 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>خضروات</title>
+<title>خضار</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>خضروات 🥦</h1>
+<h2>🥕 الخضار</h2>
 
-<div class="container">
+<div class="products">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1582515073490-dc0c1a39a7a9">
-<h3>طماطم - 10 جنيه</h3>
-<button class="add-btn" onclick="addToCart('طماطم',10)">إضافة</button>
-</div>
+    <div class="product">
+        <h3>خيار - 7 جنيه</h3>
+        <button onclick="addToCart('خيار', 7)">إضافة</button>
+    </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1603048719539-9ecb8c3d3d4f">
-<h3>بطاطس - 8 جنيه</h3>
-<button class="add-btn" onclick="addToCart('بطاطس',8)">إضافة</button>
-</div>
+    <div class="product">
+        <h3>جزر - 6 جنيه</h3>
+        <button onclick="addToCart('جزر', 6)">إضافة</button>
+    </div>
 
 </div>
 
-<div class="cart">
-<h2>السلة</h2>
-<div id="cartItems"></div>
-<div id="total"></div>
-</div>
+<a href="cart.html">🛒 الذهاب إلى السلة</a>
 
-<div class="customer">
-<h3>بيانات العميل</h3>
-<input id="name" placeholder="اسم العميل">
-<input id="phone" placeholder="رقم العميل">
-<input id="address" placeholder="العنوان">
-<button class="whatsapp-btn" onclick="sendOrder()">إرسال الطلب</button>
-</div>
+<script>
+function addToCart(name, price) {
 
-<script src="cart.js"></script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existingItem = cart.find(item => item.name === name);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("تمت الإضافة إلى السلة");
+}
+</script>
+
 </body>
 </html>
