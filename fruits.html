@@ -4,182 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>فواكه</title>
-
-<style>
-body{
-    font-family: Arial, sans-serif;
-    margin:0;
-    background:#f2f2f2;
-    text-align:center;
-}
-
-h1{
-    margin:20px 0;
-}
-
-.products{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-    padding:15px;
-}
-
-.card{
-    background:#fff;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    overflow:hidden;
-}
-
-.card img{
-    width:100%;
-    height:150px;
-    object-fit:cover;
-}
-
-.card h3{
-    padding:10px;
-}
-
-.add-btn{
-    background:#ff9800;
-    color:white;
-    border:none;
-    padding:12px;
-    width:80%;
-    margin-bottom:15px;
-    border-radius:10px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-.section{
-    background:#fff;
-    margin:20px;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-.cart-item{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:8px 0;
-}
-
-.delete-btn{
-    background:red;
-    color:white;
-    border:none;
-    padding:5px 10px;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-input{
-    width:90%;
-    padding:10px;
-    margin:8px 0;
-}
-
-.order-btn{
-    background:green;
-    color:white;
-    border:none;
-    padding:15px;
-    width:95%;
-    font-size:18px;
-    border-radius:10px;
-    cursor:pointer;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<h1>🍎 قسم الفواكه</h1>
+<h2>🍎 الفواكه</h2>
 
 <div class="products">
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1574226516831-e1dff420e12f?auto=format&fit=crop&w=800&q=60">
-<h3>موز - 15 جنيه</h3>
-<button class="add-btn" onclick="addToCart('موز',15)">إضافة</button>
-</div>
+    <div class="product">
+        <h3>طماطم - 10 جنيه</h3>
+        <button onclick="addToCart('طماطم', 10)">إضافة</button>
+    </div>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?auto=format&fit=crop&w=800&q=60">
-<h3>تفاح - 20 جنيه</h3>
-<button class="add-btn" onclick="addToCart('تفاح',20)">إضافة</button>
-</div>
+    <div class="product">
+        <h3>بطاطس - 8 جنيه</h3>
+        <button onclick="addToCart('بطاطس', 8)">إضافة</button>
+    </div>
 
 </div>
 
-<div class="section">
-<h2>السلة</h2>
-<div id="cart"></div>
-<h3 id="total">الإجمالي: 0 جنيه</h3>
-</div>
-
-<div class="section">
-<h2>بيانات العميل</h2>
-<input type="text" id="name" placeholder="اسم العميل">
-<input type="text" id="phone" placeholder="رقم العميل">
-<input type="text" id="address" placeholder="العنوان">
-<button class="order-btn" onclick="sendOrder()">إرسال الطلب</button>
-</div>
+<a href="cart.html">🛒 الذهاب إلى السلة</a>
 
 <script>
-let cart = [];
+function addToCart(name, price) {
 
-function addToCart(name,price){
-    cart.push({name,price});
-    displayCart();
-}
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-function displayCart(){
-    let cartDiv = document.getElementById("cart");
-    cartDiv.innerHTML = "";
-    let total = 0;
+    let existingItem = cart.find(item => item.name === name);
 
-    cart.forEach((item,index)=>{
-        total += item.price;
-        cartDiv.innerHTML += `
-        <div class="cart-item">
-            <span>${item.name} - ${item.price} ج</span>
-            <button class="delete-btn" onclick="removeItem(${index})">حذف</button>
-        </div>`;
-    });
-
-    document.getElementById("total").innerText = "الإجمالي: " + total + " جنيه";
-}
-
-function removeItem(index){
-    cart.splice(index,1);
-    displayCart();
-}
-
-function sendOrder(){
-    let name = document.getElementById("name").value;
-    let phone = document.getElementById("phone").value;
-    let address = document.getElementById("address").value;
-
-    if(cart.length === 0){
-        alert("السلة فاضية");
-        return;
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
     }
 
-    let message = "طلب جديد:%0A";
-    cart.forEach(item=>{
-        message += item.name + " - " + item.price + " ج%0A";
-    });
-
-    message += "%0Aالاسم: " + name;
-    message += "%0Aالرقم: " + phone;
-    message += "%0Aالعنوان: " + address;
-
-    window.open("https://wa.me/201551489292?text=" + message);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert("تمت الإضافة إلى السلة");
 }
 </script>
 
