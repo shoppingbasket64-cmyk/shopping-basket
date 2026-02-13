@@ -1,79 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>خضروات جاهزة</title>
-<link rel="stylesheet" href="style.css">
-<script src="cart.js"></script>
-</head>
-
-<body>
-
-<header>
-<div class="logo">🥗 خضروات جاهزة</div>
-<a href="cart.html" class="cart-icon">
-🛒
-<span class="cart-count" id="cartCount">0</span>
-</a>
-</header>
-
-<div class="container">
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>بصلة مقطعة</h3>
-<div class="price">15 جنيه</div>
-<button class="add-btn" onclick="addToCart('بصلة مقطعة',15)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>بطاطس مقطعة</h3>
-<div class="price">20 جنيه</div>
-<button class="add-btn" onclick="addToCart('بطاطس مقطعة',20)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>خليط شوربة</h3>
-<div class="price">25 جنيه</div>
-<button class="add-btn" onclick="addToCart('خليط شوربة',25)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>ملوخية جاهزة</h3>
-<div class="price">18 جنيه</div>
-<button class="add-btn" onclick="addToCart('ملوخية جاهزة',18)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>طماطم معصورة</h3>
-<div class="price">22 جنيه</div>
-<button class="add-btn" onclick="addToCart('طماطم معصورة',22)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>سلطة جاهزة</h3>
-<div class="price">30 جنيه</div>
-<button class="add-btn" onclick="addToCart('سلطة جاهزة',30)">أضف للسلة</button>
-</div>
-
-</div>
-
-<script>
-function updateCartCount(){
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let count = 0;
-cart.forEach(item => count += item.quantity);
-let counter = document.getElementById("cartCount");
-if(counter) counter.innerText = count;
-}
-updateCartCount();
-</script>
-
-</body>
-</html>
