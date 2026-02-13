@@ -2,11 +2,16 @@ function addToCart(name, price){
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-cart.push({name:name, price:price});
+let existing = cart.find(item => item.name === name);
+
+if(existing){
+    existing.quantity += 1;
+}else{
+    cart.push({name:name, price:price, quantity:1});
+}
 
 localStorage.setItem("cart", JSON.stringify(cart));
-
-alert("تم إضافة المنتج للسلة ✅");
+loadCart();
 }
 
 function loadCart(){
@@ -24,19 +29,42 @@ return;
 }
 
 cart.forEach((item,index)=>{
+
+let total = item.price * item.quantity;
+
 cartDiv.innerHTML += `
 <div class="cart-item">
-${item.name} - ${item.price} جنيه
+<b>${item.name}</b>
 <br>
-<button onclick="removeItem(${index})">حذف</button>
+الكمية: 
+<button onclick="decreaseQuantity(${index})">−</button>
+${item.quantity}
+<button onclick="increaseQuantity(${index})">+</button>
+<br>
+الإجمالي: ${total} جنيه
 </div>
 `;
+
 });
+
 }
 
-function removeItem(index){
+function increaseQuantity(index){
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-cart.splice(index,1);
+cart[index].quantity += 1;
+localStorage.setItem("cart", JSON.stringify(cart));
+loadCart();
+}
+
+function decreaseQuantity(index){
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+if(cart[index].quantity > 1){
+    cart[index].quantity -= 1;
+}else{
+    cart.splice(index,1);
+}
+
 localStorage.setItem("cart", JSON.stringify(cart));
 loadCart();
 }
@@ -68,7 +96,8 @@ return;
 let message = "طلب جديد 🛒%0A%0A";
 
 cart.forEach(item=>{
-message += item.name + " - " + item.price + " جنيه%0A";
+message += item.name + " × " + item.quantity + 
+" = " + (item.price * item.quantity) + " جنيه%0A";
 });
 
 message += "%0Aالاسم: " + name;
