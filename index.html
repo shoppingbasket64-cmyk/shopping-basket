@@ -7,73 +7,164 @@
 
 <style>
 body{font-family:Arial;margin:0;background:#f2f2f2;direction:rtl}
-header{background:#2e7d32;color:white;padding:15px;text-align:center;font-size:22px}
-.tabs{display:flex}
-.tabs button{flex:1;padding:12px;border:none;background:#ddd;font-size:16px;cursor:pointer}
-.tabs button.active{background:#2e7d32;color:white}
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:10px}
-.card{background:white;padding:10px;border-radius:10px;text-align:center;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
-.card img{width:100%;height:120px;object-fit:cover;border-radius:10px}
-button.add{background:#2e7d32;color:white;border:none;padding:6px;border-radius:5px;width:100%;margin-top:5px}
-.cart-box{background:white;margin:10px;padding:10px;border-radius:10px}
-input,textarea{width:100%;padding:8px;margin-bottom:6px;border-radius:6px;border:1px solid #ccc}
-.delete-btn{background:red;color:white;border:none;padding:4px;border-radius:4px;margin-top:4px}
-.clear-btn{background:#555;color:white;border:none;padding:6px;border-radius:5px;width:100%;margin-top:6px}
+
+header{
+background:#2e7d32;
+color:white;
+padding:15px;
+text-align:center;
+font-size:22px;
+position:sticky;
+top:0;
+}
+
+.tabs{
+display:flex;
+background:#fff;
+}
+
+.tabs button{
+flex:1;
+padding:12px;
+border:none;
+background:#ddd;
+font-size:16px;
+cursor:pointer;
+}
+
+.tabs button.active{
+background:#2e7d32;
+color:white;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:10px;
+padding:10px;
+}
+
+.card{
+background:white;
+padding:10px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:10px;
+}
+
+button.add{
+background:#2e7d32;
+color:white;
+border:none;
+padding:6px;
+border-radius:6px;
+width:100%;
+margin-top:5px;
+}
+
+.cart-box{
+background:white;
+padding:10px;
+margin:10px;
+border-radius:10px;
+}
+
+.delete-btn{
+background:red;
+color:white;
+border:none;
+border-radius:4px;
+padding:4px 8px;
+margin-right:5px;
+}
+
+.clear-btn{
+background:#555;
+color:white;
+border:none;
+padding:6px;
+border-radius:6px;
+width:100%;
+margin-top:5px;
+}
+
+.facebook{
+display:block;
+background:#1877f2;
+color:white;
+text-align:center;
+padding:10px;
+margin:10px;
+border-radius:8px;
+text-decoration:none;
+}
 </style>
 </head>
 
 <body>
 
-<header>🛒 سلة ماركت</header>
+<header>🛒 سلة ماركت (<span id="count">0</span>)</header>
 
 <div class="tabs">
 <button class="active" onclick="showTab('fruits',this)">🍎 فواكه وخضار</button>
 <button onclick="showTab('grocery',this)">🛒 بقالة</button>
+<button onclick="showTab('chicken',this)">🍗 دواجن</button>
 </div>
 
 <div id="fruits" class="products"></div>
 <div id="grocery" class="products" style="display:none"></div>
+<div id="chicken" class="products" style="display:none"></div>
 
 <div class="cart-box">
-<h3>السلة (<span id="count">0</span>)</h3>
-<div id="cart-items"></div>
+<h3>🛍 السلة</h3>
+<div id="cart"></div>
+<button onclick="clearCart()" class="clear-btn">🗑 مسح السلة</button>
+
 <hr>
-<input type="text" id="name" placeholder="الاسم بالكامل">
-<input type="tel" id="phone" placeholder="رقم الموبايل">
-<input type="text" id="address" placeholder="العنوان بالتفصيل">
-<textarea id="note" placeholder="ملاحظات (اختياري)"></textarea>
-<button onclick="sendOrder()" class="add">تأكيد الطلب</button>
-<button onclick="clearCart()" class="clear-btn">مسح السلة</button>
+
+<input type="text" id="name" placeholder="الاسم بالكامل" style="width:100%;padding:8px;margin-top:5px">
+<input type="tel" id="phone" placeholder="رقم الموبايل" style="width:100%;padding:8px;margin-top:5px">
+<input type="text" id="address" placeholder="العنوان بالتفصيل" style="width:100%;padding:8px;margin-top:5px">
+
+<button onclick="sendOrder()" class="add" style="margin-top:5px">📲 تأكيد الطلب</button>
 </div>
+
+<a href="https://www.facebook.com/share/1799rYD6FX/" class="facebook">👍 تابعنا على فيسبوك</a>
 
 <script>
 
-let fruitsProducts = [
-{name:"تفاح",price:25,img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg"},
-{name:"موز",price:20,img:"https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"},
-{name:"برتقال",price:18,img:"https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg"},
-{name:"فراولة",price:30,img:"https://upload.wikimedia.org/wikipedia/commons/2/29/PerfectStrawberry.jpg"},
-{name:"طماطم",price:10,img:"https://upload.wikimedia.org/wikipedia/commons/8/88/Bright_red_tomato_and_cross_section02.jpg"},
-{name:"بطاطس",price:15,img:"https://upload.wikimedia.org/wikipedia/commons/6/60/Potato_and_cross_section.jpg"},
-{name:"خيار",price:12,img:"https://upload.wikimedia.org/wikipedia/commons/9/96/Cucumis_sativus_-_Köhler–s_Medizinal-Pflanzen-038.jpg"},
-{name:"بصل",price:8,img:"https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Onion_on_White.JPG"}
+let fruitsProducts=[
+{name:"تفاح",price:25,img:"https://picsum.photos/300?1"},
+{name:"موز",price:20,img:"https://picsum.photos/300?2"},
+{name:"طماطم",price:10,img:"https://picsum.photos/300?3"},
+{name:"بطاطس",price:15,img:"https://picsum.photos/300?4"}
 ];
 
-let groceryProducts = [
-{name:"أرز",price:35,img:"https://upload.wikimedia.org/wikipedia/commons/7/70/White_rice.jpg"},
-{name:"زيت",price:60,img:"https://upload.wikimedia.org/wikipedia/commons/6/6f/Sunflower_oil.jpg"},
-{name:"سكر",price:25,img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Sugar_cubes.jpg"},
-{name:"مكرونة",price:20,img:"https://upload.wikimedia.org/wikipedia/commons/0/0e/Penne_pasta.jpg"},
-{name:"لبن",price:28,img:"https://upload.wikimedia.org/wikipedia/commons/3/36/Milk_glass.jpg"},
-{name:"جبنة",price:40,img:"https://upload.wikimedia.org/wikipedia/commons/4/4c/Cheese.jpg"},
-{name:"شاي",price:30,img:"https://upload.wikimedia.org/wikipedia/commons/7/7b/Tea_bag.jpg"},
-{name:"قهوة",price:45,img:"https://upload.wikimedia.org/wikipedia/commons/4/45/Coffee_beans.jpg"}
+let groceryProducts=[
+{name:"أرز",price:35,img:"https://picsum.photos/300?5"},
+{name:"سكر",price:25,img:"https://picsum.photos/300?6"},
+{name:"زيت",price:60,img:"https://picsum.photos/300?7"},
+{name:"مكرونة",price:20,img:"https://picsum.photos/300?8"}
 ];
 
-let cart=[];
+let chickenProducts=[
+{name:"فراخ كاملة",price:120,img:"https://picsum.photos/300?9"},
+{name:"صدور فراخ",price:140,img:"https://picsum.photos/300?10"},
+{name:"وراك فراخ",price:110,img:"https://picsum.photos/300?11"},
+{name:"كبد وقوانص",price:90,img:"https://picsum.photos/300?12"}
+];
 
-function loadProducts(list,container){
-let div=document.getElementById(container);
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+
+function loadProducts(list,id){
+let div=document.getElementById(id);
 div.innerHTML="";
 list.forEach(p=>{
 div.innerHTML+=`
@@ -88,10 +179,12 @@ div.innerHTML+=`
 
 loadProducts(fruitsProducts,"fruits");
 loadProducts(groceryProducts,"grocery");
+loadProducts(chickenProducts,"chicken");
 
 function showTab(id,btn){
 document.getElementById("fruits").style.display="none";
 document.getElementById("grocery").style.display="none";
+document.getElementById("chicken").style.display="none";
 document.getElementById(id).style.display="grid";
 document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
 btn.classList.add("active");
@@ -99,12 +192,15 @@ btn.classList.add("active");
 
 function addToCart(name,price){
 cart.push({name,price});
+localStorage.setItem("cart",JSON.stringify(cart));
 renderCart();
 }
 
 function renderCart(){
+let div=document.getElementById("cart");
 let grouped={};
 let total=0;
+
 cart.forEach(item=>{
 if(grouped[item.name]){
 grouped[item.name].qty+=1;
@@ -114,17 +210,26 @@ grouped[item.name]={qty:1,total:item.price};
 }
 total+=item.price;
 });
-let div=document.getElementById("cart-items");
+
 div.innerHTML="";
 for(let item in grouped){
-div.innerHTML+=`${item} × ${grouped[item].qty} = ${grouped[item].total} جنيه<br>`;
+div.innerHTML+=`${item} × ${grouped[item].qty} = ${grouped[item].total} جنيه 
+<button class="delete-btn" onclick="removeItem('${item}')">حذف</button><br>`;
 }
+
 div.innerHTML+=`<hr><strong>الإجمالي: ${total} جنيه</strong>`;
 document.getElementById("count").innerText=cart.length;
 }
 
+function removeItem(name){
+cart=cart.filter(item=>item.name!==name);
+localStorage.setItem("cart",JSON.stringify(cart));
+renderCart();
+}
+
 function clearCart(){
 cart=[];
+localStorage.setItem("cart",JSON.stringify(cart));
 renderCart();
 }
 
@@ -132,18 +237,16 @@ function sendOrder(){
 let name=document.getElementById("name").value;
 let phone=document.getElementById("phone").value;
 let address=document.getElementById("address").value;
-let note=document.getElementById("note").value;
 
 if(!name||!phone||!address||cart.length==0){
-alert("اكمل البيانات والسلة الاول");
+alert("اكمل البيانات والسلة");
 return;
 }
 
 let message="طلب جديد من سلة ماركت%0A";
 message+="الاسم: "+name+"%0A";
-message+="رقم الموبايل: "+phone+"%0A";
-message+="العنوان: "+address+"%0A";
-message+="الملاحظات: "+note+"%0A--------------------%0A";
+message+="الموبايل: "+phone+"%0A";
+message+="العنوان: "+address+"%0A------------%0A";
 
 let grouped={};
 cart.forEach(item=>{
@@ -161,6 +264,8 @@ message+=item+" × "+grouped[item].qty+" = "+grouped[item].total+" جنيه%0A";
 
 window.location.href="https://wa.me/201551489292?text="+message;
 }
+
+renderCart();
 
 </script>
 
