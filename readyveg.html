@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الخضار الجاهز</title>
+<title>قسم الخضار الجاهزة</title>
 
 <style>
 body{
@@ -15,11 +15,22 @@ body{
 }
 
 header{
-    background:#16a085;
+    background:#27ae60;
     color:white;
     padding:20px;
     font-size:22px;
     font-weight:bold;
+}
+
+.cart-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:black;
+    color:white;
+    padding:8px 12px;
+    border-radius:20px;
+    text-decoration:none;
 }
 
 .container{
@@ -36,77 +47,58 @@ header{
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
 
-.card img{
-    width:100%;
-    height:120px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
 .price{
-    color:#16a085;
+    color:#27ae60;
     font-weight:bold;
     margin:10px 0;
 }
 
 button{
-    background:#25D366;
+    background:#27ae60;
     color:white;
     border:none;
     padding:8px 15px;
     border-radius:5px;
     cursor:pointer;
 }
-
-button:hover{
-    opacity:0.9;
-}
 </style>
 </head>
 
 <body>
 
-<header>🥗 الخضار الجاهز</header>
+<a href="cart.html" class="cart-btn">🛒 السلة</a>
+
+<header>🥦 قسم الخضار الجاهزة</header>
 
 <div class="container">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2">
-<h3>خضار شوربة</h3>
-<div class="price">20 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20خضار%20شوربة">
-<button>اطلب الآن</button>
-</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1613145993483-5bba3e1c7b8d">
 <h3>ملوخية جاهزة</h3>
-<div class="price">15 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20ملوخية%20جاهزة">
-<button>اطلب الآن</button>
-</a>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1582281298055-e25b84a30b0b">
-<h3>بامية جاهزة</h3>
 <div class="price">25 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20بامية%20جاهزة">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('ملوخية جاهزة',25)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1576402187878-974f70c890a5">
-<h3>خضار محشي</h3>
+<h3>بامية جاهزة</h3>
 <div class="price">30 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20خضار%20محشي">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('بامية جاهزة',30)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<h3>بسلة وجزر</h3>
+<div class="price">28 جنيه</div>
+<button onclick="addToCart('بسلة وجزر',28)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<h3>خضار مشكل</h3>
+<div class="price">35 جنيه</div>
+<button onclick="addToCart('خضار مشكل',35)">أضف للسلة</button>
 </div>
 
 </div>
+
+<script src="cart.js"></script>
 
 </body>
 </html>
