@@ -6,58 +6,60 @@
 <title>سلة ماركت</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>
-  <div>سلة ماركت</div>
-  <a href="cart.html" class="cart-icon">
-    🛒 <span id="cartCount">0</span>
+<header class="main-header">
+  <h1>🛒 سلة ماركت</h1>
+  <a href="cart.html" class="cart-btn">
+    السلة (<span id="cartCount">0</span>)
   </a>
 </header>
 
 <div class="container">
 
-<h2 class="section-title">الأقسام</h2>
+<h2 class="welcome">أهلاً بيك 👋 اطلب كل اللي تحتاجه بسهولة</h2>
 
-<div class="grid">
+<div class="categories-grid">
 
   <!-- خضروات -->
-  <a href="vegetables.html" class="category-box">
-    <div class="category-img" style="background-image:url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=600');"></div>
-    <div class="category-title">🥬 خضروات</div>
+  <a href="vegetables.html" class="category-card">
+    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600">
+    <h3>🥦 خضروات</h3>
+    <p>طازة يوم بيوم</p>
   </a>
 
   <!-- فواكه -->
-  <a href="fruits.html" class="category-box">
-    <div class="category-img" style="background-image:url('https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=600');"></div>
-    <div class="category-title">🍎 فواكه</div>
+  <a href="fruits.html" class="category-card">
+    <img src="https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=600">
+    <h3>🍎 فواكه</h3>
+    <p>أحلى فاكهة في السوق</p>
   </a>
 
   <!-- لحوم -->
-  <a href="meat.html" class="category-box">
-    <div class="category-img" style="background-image:url('https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600');"></div>
-    <div class="category-title">🥩 لحوم</div>
+  <a href="meat.html" class="category-card">
+    <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=600">
+    <h3>🥩 لحوم</h3>
+    <p>بلدي ومضمونة</p>
   </a>
 
-  <!-- دواجن -->
-  <a href="chicken.html" class="category-box">
-    <div class="category-img" style="background-image:url('https://images.unsplash.com/photo-1587593810167-a84920ea0781?w=600');"></div>
-    <div class="category-title">🍗 دواجن</div>
+  <!-- بقالة -->
+  <a href="grocery.html" class="category-card">
+    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600">
+    <h3>🛍️ بقالة</h3>
+    <p>كل احتياجات بيتك</p>
   </a>
 
 </div>
 
-<!-- زرار الفيس -->
-<div class="facebook-box">
+<!-- فيسبوك تحت في النص -->
+<div class="facebook-section">
   <a href="https://www.facebook.com/share/188r3Gj8C9/" target="_blank">
-    تابعنا على فيسبوك
+    تابعنا على فيسبوك 📘
   </a>
 </div>
 
 </div>
 
 <script src="cart.js"></script>
-
 </body>
 </html>
