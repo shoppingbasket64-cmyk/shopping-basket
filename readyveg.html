@@ -3,102 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>قسم الخضار الجاهزة</title>
-
-<style>
-body{
-    font-family: Arial;
-    background:#f5f5f5;
-    margin:0;
-    padding:0;
-    text-align:center;
-}
-
-header{
-    background:#27ae60;
-    color:white;
-    padding:20px;
-    font-size:22px;
-    font-weight:bold;
-}
-
-.cart-btn{
-    position:fixed;
-    top:15px;
-    left:15px;
-    background:black;
-    color:white;
-    padding:8px 12px;
-    border-radius:20px;
-    text-decoration:none;
-}
-
-.container{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    padding:20px;
-}
-
-.card{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 4px 8px rgba(0,0,0,0.1);
-}
-
-.price{
-    color:#27ae60;
-    font-weight:bold;
-    margin:10px 0;
-}
-
-button{
-    background:#27ae60;
-    color:white;
-    border:none;
-    padding:8px 15px;
-    border-radius:5px;
-    cursor:pointer;
-}
-</style>
+<title>خضروات جاهزة</title>
+<link rel="stylesheet" href="style.css">
+<script src="cart.js"></script>
 </head>
 
 <body>
 
-<a href="cart.html" class="cart-btn">🛒 السلة</a>
-
-<header>🥦 قسم الخضار الجاهزة</header>
+<header>
+<div class="logo">🥗 خضروات جاهزة</div>
+<a href="cart.html" class="cart-icon">
+🛒
+<span class="cart-count" id="cartCount">0</span>
+</a>
+</header>
 
 <div class="container">
 
 <div class="card">
-<h3>ملوخية جاهزة</h3>
+<img src="https://via.placeholder.com/150">
+<h3>بصلة مقطعة</h3>
+<div class="price">15 جنيه</div>
+<button class="add-btn" onclick="addToCart('بصلة مقطعة',15)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h3>بطاطس مقطعة</h3>
+<div class="price">20 جنيه</div>
+<button class="add-btn" onclick="addToCart('بطاطس مقطعة',20)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h3>خليط شوربة</h3>
 <div class="price">25 جنيه</div>
-<button onclick="addToCart('ملوخية جاهزة',25)">أضف للسلة</button>
+<button class="add-btn" onclick="addToCart('خليط شوربة',25)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<h3>بامية جاهزة</h3>
+<img src="https://via.placeholder.com/150">
+<h3>ملوخية جاهزة</h3>
+<div class="price">18 جنيه</div>
+<button class="add-btn" onclick="addToCart('ملوخية جاهزة',18)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h3>طماطم معصورة</h3>
+<div class="price">22 جنيه</div>
+<button class="add-btn" onclick="addToCart('طماطم معصورة',22)">أضف للسلة</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/150">
+<h3>سلطة جاهزة</h3>
 <div class="price">30 جنيه</div>
-<button onclick="addToCart('بامية جاهزة',30)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<h3>بسلة وجزر</h3>
-<div class="price">28 جنيه</div>
-<button onclick="addToCart('بسلة وجزر',28)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<h3>خضار مشكل</h3>
-<div class="price">35 جنيه</div>
-<button onclick="addToCart('خضار مشكل',35)">أضف للسلة</button>
+<button class="add-btn" onclick="addToCart('سلطة جاهزة',30)">أضف للسلة</button>
 </div>
 
 </div>
 
-<script src="cart.js"></script>
+<script>
+function updateCartCount(){
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let count = 0;
+cart.forEach(item => count += item.quantity);
+let counter = document.getElementById("cartCount");
+if(counter) counter.innerText = count;
+}
+updateCartCount();
+</script>
 
 </body>
 </html>
