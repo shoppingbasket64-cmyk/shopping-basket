@@ -3,101 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopping Basket</title>
+<title>سلة ماركت</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial;
-background:#f2f2f2;
-direction:rtl;
-}
-
-.header{
-background:#2e7d32;
-color:white;
-text-align:center;
-padding:15px;
-font-size:22px;
-font-weight:bold;
-}
-
-.container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:15px;
-padding:20px;
-}
-
-.category-card{
-background:#fff;
-border-radius:20px;
-padding:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-text-align:center;
-text-decoration:none;
-color:inherit;
-}
-
-.category-card h2{
-font-size:16px;
-margin-bottom:10px;
-}
-
-.category-card img{
-width:100%;
-height:150px;
-object-fit:cover;
-border-radius:15px;
-}
-
-.facebook-btn{
-display:block;
-width:fit-content;
-margin:20px auto 40px;
-padding:8px 18px;
-background:#1877f2;
-color:white;
-text-decoration:none;
-border-radius:20px;
-font-size:14px;
-}
-</style>
+<link rel="stylesheet" href="style.css">
+<script src="cart.js"></script>
 </head>
 
 <body>
 
-<div class="header">Shopping Basket</div>
+<header>
+  <div>سلة ماركت</div>
+  <a href="cart.html" class="cart-icon">
+    🛒 <span id="cartCount">0</span>
+  </a>
+</header>
 
-<div class="container">
+<div class="products">
 
-<a href="grocery.html" class="category-card">
-<h2>منتجات بقالة</h2>
-<img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
-</a>
+<!-- تفاح -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?auto=format&fit=crop&w=800&q=60">
+  <h3>تفاح</h3>
+  <p class="price">30 جنيه</p>
 
-<a href="fruits.html" class="category-card">
-<h2>فواكه وخضار</h2>
-<img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf">
-</a>
-
-<a href="chicken.html" class="category-card">
-<h2>دواجن</h2>
-<img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d">
-</a>
-
-<a href="readyveg.html" class="category-card">
-<h2>خضروات جاهزة</h2>
-<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
-</a>
-
+  <div class="qty-control">
+    <button onclick="changeQty('تفاح',30,-1)">-</button>
+    <span id="تفاح-qty">0</span>
+    <button onclick="changeQty('تفاح',30,1)">+</button>
+  </div>
 </div>
 
-<a class="facebook-btn"
-href="https://www.facebook.com/share/1799rYD6FX/"
-target="_blank">
-📘 فيسبوك
-</a>
+<!-- موز -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1574226516831-e1dff420e37d?auto=format&fit=crop&w=800&q=60">
+  <h3>موز</h3>
+  <p class="price">25 جنيه</p>
+
+  <div class="qty-control">
+    <button onclick="changeQty('موز',25,-1)">-</button>
+    <span id="موز-qty">0</span>
+    <button onclick="changeQty('موز',25,1)">+</button>
+  </div>
+</div>
+
+<!-- طماطم -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1582515073490-dc0b6f3d5d89?auto=format&fit=crop&w=800&q=60">
+  <h3>طماطم</h3>
+  <p class="price">15 جنيه</p>
+
+  <div class="qty-control">
+    <button onclick="changeQty('طماطم',15,-1)">-</button>
+    <span id="طماطم-qty">0</span>
+    <button onclick="changeQty('طماطم',15,1)">+</button>
+  </div>
+</div>
+
+<!-- فراخ -->
+<div class="card">
+  <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=800&q=60">
+  <h3>فراخ</h3>
+  <p class="price">90 جنيه</p>
+
+  <div class="qty-control">
+    <button onclick="changeQty('فراخ',90,-1)">-</button>
+    <span id="فراخ-qty">0</span>
+    <button onclick="changeQty('فراخ',90,1)">+</button>
+  </div>
+</div>
+
+</div>
 
 </body>
 </html>
