@@ -3,77 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>قسم الدواجن</title>
+<title>دواجن</title>
 <link rel="stylesheet" href="style.css">
-<script src="cart.js"></script>
 </head>
-
 <body>
 
-<header>
-<div class="logo">🍗 قسم الدواجن</div>
-<a href="cart.html" class="cart-icon">
-🛒
-<span class="cart-count" id="cartCount">0</span>
-</a>
-</header>
+<h1>دواجن 🍗</h1>
 
 <div class="container">
 
 <div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>فرخة كاملة</h3>
-<div class="price">120 جنيه</div>
-<button class="add-btn" onclick="addToCart('فرخة كاملة',120)">أضف للسلة</button>
+<img src="https://images.unsplash.com/photo-1604908554027-1b53b0b3d0f0">
+<h3>فرخة كاملة - 120 جنيه</h3>
+<button class="add-btn" onclick="addToCart('فرخة كاملة',120)">إضافة</button>
 </div>
 
 <div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>صدور فراخ</h3>
-<div class="price">150 جنيه</div>
-<button class="add-btn" onclick="addToCart('صدور فراخ',150)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>أوراك فراخ</h3>
-<div class="price">110 جنيه</div>
-<button class="add-btn" onclick="addToCart('أوراك فراخ',110)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>بانيه</h3>
-<div class="price">170 جنيه</div>
-<button class="add-btn" onclick="addToCart('بانيه',170)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>كبد وقوانص</h3>
-<div class="price">130 جنيه</div>
-<button class="add-btn" onclick="addToCart('كبد وقوانص',130)">أضف للسلة</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/150">
-<h3>شاورما فراخ</h3>
-<div class="price">180 جنيه</div>
-<button class="add-btn" onclick="addToCart('شاورما فراخ',180)">أضف للسلة</button>
+<img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086">
+<h3>صدور فراخ - 150 جنيه</h3>
+<button class="add-btn" onclick="addToCart('صدور فراخ',150)">إضافة</button>
 </div>
 
 </div>
 
-<script>
-function updateCartCount(){
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let count = 0;
-cart.forEach(item => count += item.quantity);
-let counter = document.getElementById("cartCount");
-if(counter) counter.innerText = count;
-}
-updateCartCount();
-</script>
+<div class="cart">
+<h2>السلة</h2>
+<div id="cartItems"></div>
+<div id="total"></div>
+</div>
 
+<div class="customer">
+<h3>بيانات العميل</h3>
+<input id="name" placeholder="اسم العميل">
+<input id="phone" placeholder="رقم العميل">
+<input id="address" placeholder="العنوان">
+<button class="whatsapp-btn" onclick="sendOrder()">إرسال الطلب</button>
+</div>
+
+<script src="cart.js"></script>
 </body>
 </html>
