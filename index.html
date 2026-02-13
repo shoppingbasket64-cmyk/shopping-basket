@@ -230,12 +230,32 @@ button{
 </div>
 
 <script>
-function order(product){
+
+let cart = [];
+
+function addToCart(product){
+    cart.push(product);
+    alert(product + " اتضاف للسلة ✅");
+}
+
+function sendOrder(){
+    if(cart.length === 0){
+        alert("السلة فاضية 🛒");
+        return;
+    }
+
+    let message = "طلب جديد:%0A";
+
+    for(let i = 0; i < cart.length; i++){
+        message += "- " + cart[i] + "%0A";
+    }
+
     let phone = "201551489292";
-    let message = "السلام عليكم، عايز أطلب " + product;
-    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
+    let url = "https://wa.me/" + phone + "?text=" + message;
+
     window.open(url, "_blank");
 }
+
 </script>
 
 </body>
