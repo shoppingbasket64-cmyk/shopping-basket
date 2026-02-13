@@ -3,81 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ماركت الخير</title>
+<title>Shopping Basket</title>
 
 <style>
-body{
-font-family:Arial;
-margin:0;
-background:#f4f4f4;
-direction:rtl;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    direction: rtl;
 }
 
-header{
-background:#2e7d32;
-color:white;
-padding:20px;
-text-align:center;
-font-size:26px;
+/* الهيدر */
+.header {
+    background: #2e7d32;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:20px;
+/* زرار فيسبوك */
+.facebook-btn {
+    display: block;
+    width: 90%;
+    margin: 15px auto;
+    padding: 12px;
+    background: #1877f2;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.card{
-background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-text-align:center;
-text-decoration:none;
-color:black;
+/* الكروت */
+.category-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 15px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
+.category-card h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
 }
 
-.card h3{
-padding:15px;
-margin:0;
-font-size:20px;
-}
-
-.card:hover{
-transform:scale(1.03);
-transition:0.3s;
+.category-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<header>🛒 سلة ماركت</header>
+<div class="header">
+    Shopping Basket
+</div>
 
-<div class="grid">
-
-<a href="fruits.html" class="card">
-<img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf">
-<h3>فواكه وخضار طازجة</h3>
+<!-- زرار فيسبوك -->
+<a class="facebook-btn" href="https://www.facebook.com/share/1799rYD6FX/" target="_blank">
+    تابعنا على فيسبوك
 </a>
 
-<a href="grocery.html" class="card">
-<img src="https://images.unsplash.com/photo-1586201375761-83865001e31c">
-<h3>منتجات بقالة</h3>
-</a>
+<!-- الأقسام -->
+<div class="category-card">
+    <h2>فواكه وخضار طازجة</h2>
+    <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf" alt="فواكه">
+</div>
 
-<a href="chicken.html" class="card">
-<img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092">
-<h3>دواجن طازجة</h3>
-</a>
+<div class="category-card">
+    <h2>منتجات بقالة</h2>
+    <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c" alt="بقالة">
+</div>
 
+<div class="category-card">
+    <h2>وجبات جاهزة</h2>
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="وجبات">
 </div>
 
 </body>
