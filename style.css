@@ -1,151 +1,83 @@
-/* ======= إعدادات عامة ======= */
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    direction: rtl;
-    text-align: center;
+body{
+margin:0;
+font-family:Arial;
+background:#f2f2f2;
+direction:rtl;
+text-align:center;
 }
 
-/* ======= حاوية المنتجات ======= */
-.products-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 0 10px;
+.title{
+padding:20px;
 }
 
-/* ======= كل كارت منتج ======= */
-.product-card {
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: transform 0.2s;
+.container{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+padding:15px;
 }
 
-.product-card:hover {
-    transform: translateY(-5px);
+.card{
+background:#fff;
+border-radius:15px;
+overflow:hidden;
+text-decoration:none;
+color:black;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
-.product-card img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
+.card img{
+width:100%;
+height:160px;
+object-fit:cover;
 }
 
-.product-card h3 {
-    margin: 10px 0 5px;
-    font-size: 18px;
+.card h3{
+padding:10px;
 }
 
-.product-card p {
-    margin: 0 0 10px;
-    color: #666;
-    font-size: 14px;
+.facebook{
+margin:20px;
 }
 
-/* ======= أزرار إضافة للسلة + كمية ======= */
-.quantity-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+.facebook a{
+background:#1877f2;
+color:white;
+padding:10px 20px;
+border-radius:10px;
+text-decoration:none;
 }
 
-.quantity-controls button {
-    padding: 5px 10px;
-    border: none;
-    border-radius: 6px;
-    background-color: #ff9800;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
+.cart, .customer{
+background:#fff;
+margin:15px;
+padding:15px;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+text-align:right;
 }
 
-.add-to-cart {
-    background-color: #ff9800;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 15px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    width: 90%;
+button{
+border:none;
+padding:6px 12px;
+border-radius:6px;
+cursor:pointer;
 }
 
-.add-to-cart:hover {
-    background-color: #e68900;
+.add-btn{
+background:#ff9800;
+color:#fff;
 }
 
-/* ======= السلة ======= */
-.cart-container {
-    max-width: 500px;
-    margin: 20px auto;
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.delete-btn{
+background:red;
+color:#fff;
 }
 
-.cart-container h2,
-.cart-container h3 {
-    text-align: center;
-}
-
-.cart-item {
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-    text-align: center;
-}
-
-.total {
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-.cart-container input {
-    width: 90%;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.cart-container button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.cart-container button#clear {
-    background-color: #f44336;
-}
-
-/* ======= أزرار واتساب ======= */
-.send-whatsapp {
-    background-color: #25D366;
-}
-
-.send-whatsapp:hover {
-    background-color: #1ebe5b;
-}
-
-/* ======= هوامش ======= */
-h2, h3 {
-    margin: 10px 0;
+.whatsapp-btn{
+background:green;
+color:white;
+width:100%;
+padding:10px;
+font-size:16px;
 }
