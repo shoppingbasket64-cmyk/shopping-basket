@@ -15,11 +15,22 @@ body{
 }
 
 header{
-    background:#e67e22;
+    background:#c0392b;
     color:white;
     padding:20px;
     font-size:22px;
     font-weight:bold;
+}
+
+.cart-btn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:black;
+    color:white;
+    padding:8px 12px;
+    border-radius:20px;
+    text-decoration:none;
 }
 
 .container{
@@ -36,77 +47,58 @@ header{
     box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
 
-.card img{
-    width:100%;
-    height:120px;
-    object-fit:cover;
-    border-radius:8px;
-}
-
 .price{
-    color:#e67e22;
+    color:#27ae60;
     font-weight:bold;
     margin:10px 0;
 }
 
 button{
-    background:#25D366;
+    background:#c0392b;
     color:white;
     border:none;
     padding:8px 15px;
     border-radius:5px;
     cursor:pointer;
 }
-
-button:hover{
-    opacity:0.9;
-}
 </style>
 </head>
 
 <body>
+
+<a href="cart.html" class="cart-btn">🛒 السلة</a>
 
 <header>🍗 قسم الدواجن</header>
 
 <div class="container">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1604908554027-9c5b0f0b6b8e">
 <h3>فرخة كاملة</h3>
 <div class="price">120 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20فرخة%20كاملة">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('فرخة كاملة',120)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1587593810167-a84920ea0781">
 <h3>صدور فراخ</h3>
 <div class="price">150 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20صدور%20فراخ">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('صدور فراخ',150)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1613145993483-5bba3e1c7b8d">
 <h3>أوراك فراخ</h3>
 <div class="price">110 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20أوراك%20فراخ">
-<button>اطلب الآن</button>
-</a>
+<button onclick="addToCart('أوراك فراخ',110)">أضف للسلة</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1604908176997-4318f1b0a4a3">
-<h3>كبد وقوانص</h3>
-<div class="price">95 جنيه</div>
-<a href="https://wa.me/201551489292?text=عايز%20كبد%20وقوانص">
-<button>اطلب الآن</button>
-</a>
+<h3>بانيه</h3>
+<div class="price">170 جنيه</div>
+<button onclick="addToCart('بانيه',170)">أضف للسلة</button>
 </div>
 
 </div>
+
+<script src="cart.js"></script>
 
 </body>
 </html>
