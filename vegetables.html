@@ -4,129 +4,38 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>خضروات - Shopping Basket</title>
-
 <style>
-body{
-    margin:0;
-    font-family:Tahoma, sans-serif;
-    background:#f5f5f5;
-    text-align:center;
-}
-
-/* Header */
-header{
-    background:#0d6efd;
-    color:white;
-    padding:15px;
-    font-size:22px;
-}
-
-/* Container المنتجات */
-.container{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    padding:20px;
-}
-
-/* كروت المنتجات */
-.card{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    font-size:18px;
-}
-
-.card img{
-    width:100%;
-    border-radius:10px;
-    margin-bottom:10px;
-}
-
-/* زر الإضافة */
-button{
-    padding:8px 15px;
-    border:none;
-    border-radius:8px;
-    background:#0d6efd;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    background:#08306b;
-}
-
-/* سلة المنتجات */
-.cart{
-    background:#ffc107;
-    padding:10px;
-    border-radius:10px;
-    font-size:18px;
-    margin:15px;
-}
+body{margin:0;font-family:Tahoma, sans-serif;background:#f5f5f5;text-align:center;}
+header{background:#0d6efd;color:white;padding:15px;font-size:22px;}
+.container{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:20px;}
+.card{background:white;padding:20px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.1);font-size:18px;}
+.card img{width:100%;border-radius:10px;margin-bottom:10px;}
+.quantity{display:flex;justify-content:center;align-items:center;margin-top:10px;}
+.quantity button{padding:5px 10px;margin:0 5px;border:none;border-radius:5px;background:#0d6efd;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
+.quantity button:hover{background:#08306b;}
+.quantity span{min-width:30px;display:inline-block;font-size:16px;}
+.add-btn{margin-top:10px;padding:8px 15px;border:none;border-radius:8px;background:#198754;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
+.add-btn:hover{background:#145c3c;}
+.cart-icon{position:fixed;top:10px;right:10px;background:#ffc107;padding:10px 15px;border-radius:50px;cursor:pointer;font-weight:bold;box-shadow:0 3px 6px rgba(0,0,0,0.2);z-index:100;}
 </style>
-
-<script>
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// تحديث عدد المنتجات
-function updateCartCount(){
-    const countElem = document.getElementById('cart-count');
-    if(countElem) countElem.innerText = cart.length;
-}
-
-// إضافة منتج للسلة مع السعر
-function addToCart(name, price){
-    cart.push({name:name, price:price});
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    alert(name + " تم إضافته للسلة بسعر " + price + " جنيه!");
-}
-
-updateCartCount();
-</script>
-
 </head>
 <body>
-
-<header>
-🥬 خضروات
-</header>
-
-<div class="cart" id="cart">
-🛒 سلة: <span id="cart-count">0</span> منتجات
-</div>
-
+<header>🥬 خضروات</header>
+<div class="cart-icon" onclick="goToCart()">🛒 <span id="cart-count-header">0</span></div>
 <div class="container">
-    <div class="card">
-        <img src="veg1.jpg" alt="خيار">
-        خيار
-        <br><br>
-        <button onclick="addToCart('خيار', 5)">أضف للسلة - 5 جنيه</button>
-    </div>
-    <div class="card">
-        <img src="veg2.jpg" alt="طماطم">
-        طماطم
-        <br><br>
-        <button onclick="addToCart('طماطم', 6)">أضف للسلة - 6 جنيه</button>
-    </div>
-    <div class="card">
-        <img src="veg3.jpg" alt="جزر">
-        جزر
-        <br><br>
-        <button onclick="addToCart('جزر', 4)">أضف للسلة - 4 جنيه</button>
-    </div>
-    <div class="card">
-        <img src="veg4.jpg" alt="فلفل">
-        فلفل
-        <br><br>
-        <button onclick="addToCart('فلفل', 7)">أضف للسلة - 7 جنيه</button>
-    </div>
+<div class="card"><img src="veg1.jpg" alt="خيار">خيار<div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div><button class="add-btn" onclick="addToCart('خيار',5,this)">أضف للسلة - 5 جنيه</button></div>
+<div class="card"><img src="veg2.jpg" alt="طماطم">طماطم<div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div><button class="add-btn" onclick="addToCart('طماطم',6,this)">أضف للسلة - 6 جنيه</button></div>
+<div class="card"><img src="veg3.jpg" alt="جزر">جزر<div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div><button class="add-btn" onclick="addToCart('جزر',4,this)">أضف للسلة - 4 جنيه</button></div>
+<div class="card"><img src="veg4.jpg" alt="فلفل">فلفل<div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div><button class="add-btn" onclick="addToCart('فلفل',7,this)">أضف للسلة - 7 جنيه</button></div>
 </div>
-
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+function goToCart(){ window.location.href='cart.html'; }
+function increaseQty(el){ let span=el.parentElement.querySelector('span'); span.innerText=parseInt(span.innerText)+1; }
+function decreaseQty(el){ let span=el.parentElement.querySelector('span'); if(parseInt(span.innerText)>1) span.innerText=parseInt(span.innerText)-1; }
+function addToCart(name, price, btn){ let qty=parseInt(btn.previousElementSibling.querySelector('span').innerText); let index=cart.findIndex(p=>p.name===name); if(index!==-1){cart[index].qty+=qty;} else{cart.push({name:name,price:price,qty:qty});} localStorage.setItem('cart',JSON.stringify(cart)); updateCartHeader(); alert(name+" تم إضافته للسلة ("+qty+")"); }
+function updateCartHeader(){let total=0;cart.forEach(p=>total+=p.qty);document.getElementById('cart-count-header').innerText=total;}
+updateCartHeader();
+</script>
 </body>
 </html>
