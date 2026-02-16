@@ -30,25 +30,33 @@ input{margin:5px 0;padding:8px;width:250px;border-radius:5px;border:1px solid #c
 <button id="whatsapp-btn">📲 طلب عبر واتساب</button>
 
 <script>
+// قراءة السلة من localStorage
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const list=document.getElementById('cart-list');
-const totalElem=document.getElementById('total-price');
 
+const list = document.getElementById('cart-list');
+const totalElem = document.getElementById('total-price');
+
+// عرض السلة مع تصحيح أي qty غير موجود
 function renderCart(){
-    list.innerHTML='';
-    let total=0;
+    list.innerHTML = '';
+    let total = 0;
+
     cart.forEach((item,index)=>{
-        total+=item.price*item.qty;
-        let li=document.createElement('li');
-        li.innerHTML=`${item.name} (${item.qty}) - ${item.price} جنيه <button onclick="removeItem(${index})">حذف</button>`;
+        if(!item.qty || isNaN(item.qty)) item.qty = 1; // التأكد من الكمية
+        total += item.price * item.qty;
+        let li = document.createElement('li');
+        li.innerHTML = `${item.name} (${item.qty}) - ${item.price} جنيه <button onclick="removeItem(${index})">حذف</button>`;
         list.appendChild(li);
     });
-    totalElem.innerText=`الإجمالي: ${total} جنيه`;
+
+    totalElem.innerText = `الإجمالي: ${total} جنيه`;
+    localStorage.setItem('cart', JSON.stringify(cart)); // تحديث السلة بعد تصحيح qty
 }
 
+// حذف منتج
 function removeItem(index){
     cart.splice(index,1);
-    localStorage.setItem('cart',JSON.stringify(cart));
+    localStorage.setItem('cart', JSON.stringify(cart));
     renderCart();
 }
 
@@ -72,17 +80,19 @@ whatsappBtn.addEventListener('click', ()=>{
         return;
     }
     
+    // تكوين الرسالة
     let msg = `مرحبًا، أود طلب هذه المنتجات:%0A`;
-    let total=0;
+    let total = 0;
     cart.forEach(item=>{
+        if(!item.qty || isNaN(item.qty)) item.qty = 1;
         msg += `${item.name} (الكمية: ${item.qty}) - ${item.price} جنيه لكل وحدة%0A`;
-        total+=item.price*item.qty;
+        total += item.price * item.qty;
     });
     msg += `الإجمالي: ${total} جنيه%0A%0A`;
     msg += `بيانات العميل:%0Aالاسم: ${name}%0Aالعنوان: ${address}%0Aرقم التليفون: ${phone}`;
     
     // رقمك على واتساب
-    let waNumber = "1551489292"; // ضع رقمك هنا
+    let waNumber = "1551489292";
     window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
 });
 </script>
