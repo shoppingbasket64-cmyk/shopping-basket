@@ -43,31 +43,88 @@ header{
     border-radius:10px;
     margin-bottom:10px;
 }
-</style>
-</head>
 
+/* زر الإضافة */
+button{
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    background:#0d6efd;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#08306b;
+}
+
+/* سلة المنتجات */
+.cart{
+    background:#ffc107;
+    padding:10px;
+    border-radius:10px;
+    font-size:18px;
+    margin:15px;
+}
+</style>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// تحديث عدد المنتجات
+function updateCartCount(){
+    const countElem = document.getElementById('cart-count');
+    if(countElem) countElem.innerText = cart.length;
+}
+
+// إضافة منتج للسلة مع السعر
+function addToCart(name, price){
+    cart.push({name:name, price:price});
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert(name + " تم إضافته للسلة بسعر " + price + " جنيه!");
+}
+
+updateCartCount();
+</script>
+
+</head>
 <body>
 
 <header>
 🥬 خضروات
 </header>
 
+<div class="cart" id="cart">
+🛒 سلة: <span id="cart-count">0</span> منتجات
+</div>
+
 <div class="container">
     <div class="card">
         <img src="veg1.jpg" alt="خيار">
         خيار
+        <br><br>
+        <button onclick="addToCart('خيار', 5)">أضف للسلة - 5 جنيه</button>
     </div>
     <div class="card">
         <img src="veg2.jpg" alt="طماطم">
         طماطم
+        <br><br>
+        <button onclick="addToCart('طماطم', 6)">أضف للسلة - 6 جنيه</button>
     </div>
     <div class="card">
         <img src="veg3.jpg" alt="جزر">
         جزر
+        <br><br>
+        <button onclick="addToCart('جزر', 4)">أضف للسلة - 4 جنيه</button>
     </div>
     <div class="card">
         <img src="veg4.jpg" alt="فلفل">
         فلفل
+        <br><br>
+        <button onclick="addToCart('فلفل', 7)">أضف للسلة - 7 جنيه</button>
     </div>
 </div>
 
