@@ -3,81 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سلة التسوق</title>
+<title>سلة ماركت</title>
+
 <style>
-    body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; }
-    .product { background: #fff; padding: 15px; margin-bottom: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    h3 { margin: 0 0 10px 0; }
-    .price { color: green; margin-bottom: 10px; }
-    button { background: #2d8f2d; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #1f6f1f; }
-    h2 { margin-top: 30px; }
-    .whatsapp-order { display: inline-block; margin-top: 10px; background: #25D366; color: #fff; padding: 10px 15px; text-decoration: none; border-radius: 5px; }
+body{
+margin:0;
+font-family:Tahoma;
+background:#f5f5f5;
+text-align:center;
+}
+
+header{
+background:#0d6efd;
+color:white;
+padding:20px;
+font-size:24px;
+}
+
+.logo{
+width:120px;
+margin-top:10px;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+cursor:pointer;
+transition:0.3s;
+font-size:20px;
+}
+
+.card:hover{
+transform:scale(1.05);
+background:#0d6efd;
+color:white;
+}
 </style>
 </head>
+
 <body>
 
-<h1>منتجات البقالة</h1>
+<header>
+سلة ماركت
+<br>
+<img src="logo.png" class="logo">
+</header>
 
-<div class="product">
-    <h3>طماطم</h3>
-    <div class="price">10 جنيه / الكيلو</div>
-    <button onclick="addToCart('طماطم')">اطلب المنتج</button>
+<div class="container">
+<div class="card">🥬 خضروات</div>
+<div class="card">🍎 فواكه</div>
+<div class="card">🛒 بقالة</div>
+<div class="card">🍪 تسالي</div>
 </div>
-
-<div class="product">
-    <h3>موز</h3>
-    <div class="price">15 جنيه / الكيلو</div>
-    <button onclick="addToCart('موز')">اطلب المنتج</button>
-</div>
-
-<h2>قسم البقالة 🛒</h2>
-
-<div class="product">
-    <h3>سكر</h3>
-    <div class="price">25 جنيه / الكيلو</div>
-    <button onclick="addToCart('سكر')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-    <h3>أرز</h3>
-    <div class="price">30 جنيه / الكيلو</div>
-    <button onclick="addToCart('أرز')">اطلب المنتج</button>
-</div>
-
-<div class="product">
-    <h3>زيت خليط</h3>
-    <div class="price">70 جنيه / الزجاجة</div>
-    <button onclick="addToCart('زيت خليط')">اطلب المنتج</button>
-</div>
-
-<a href="#" class="whatsapp-order" onclick="sendOrder()">أرسل السلة على واتساب</a>
-
-<script>
-let cart = [];
-
-function addToCart(product){
-    cart.push(product);
-    alert(product + " اتضاف للسلة ✅");
-}
-
-function sendOrder(){
-    if(cart.length === 0){
-        alert("السلة فاضية 🛒");
-        return;
-    }
-
-    let message = "طلب جديد:\n";
-    for(let i = 0; i < cart.length; i++){
-        message += "- " + cart[i] + "\n";
-    }
-
-    let phone = "201551489292"; // رقمك على واتساب
-    let url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
-
-    window.open(url, "_blank");
-}
-</script>
 
 </body>
 </html>
