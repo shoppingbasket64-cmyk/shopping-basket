@@ -44,11 +44,19 @@ header{
     margin-bottom:10px;
 }
 
-/* زر الإضافة */
-button{
-    padding:8px 15px;
+/* أزرار الكمية */
+.quantity{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:10px;
+}
+
+.quantity button{
+    padding:5px 10px;
+    margin:0 5px;
     border:none;
-    border-radius:8px;
+    border-radius:5px;
     background:#0d6efd;
     color:white;
     font-weight:bold;
@@ -56,69 +64,145 @@ button{
     transition:0.3s;
 }
 
-button:hover{
+.quantity button:hover{
     background:#08306b;
 }
+
+.quantity span{
+    min-width:30px;
+    display:inline-block;
+    font-size:16px;
+}
+
+/* زر إضافة للسلة */
+.add-btn{
+    margin-top:10px;
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    background:#198754;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.add-btn:hover{
+    background:#145c3c;
+}
+
+/* أيقونة السلة */
+.cart-icon{
+    position:fixed;
+    top:10px;
+    right:10px;
+    background:#ffc107;
+    padding:10px 15px;
+    border-radius:50px;
+    cursor:pointer;
+    font-weight:bold;
+    box-shadow:0 3px 6px rgba(0,0,0,0.2);
+    z-index:100;
+}
 </style>
-
-<script>
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-// تحديث عدد المنتجات
-function updateCartCount(){
-    const countElem = document.getElementById('cart-count');
-    if(countElem) countElem.innerText = cart.length;
-}
-
-// إضافة منتج للسلة مع السعر
-function addToCart(name, price){
-    cart.push({name:name, price:price});
-    localStorage.setItem('cart', JSON.stringify(cart));
-    updateCartCount();
-    alert(name + " تم إضافته للسلة بسعر " + price + " جنيه!");
-}
-
-updateCartCount();
-</script>
 
 </head>
 <body>
 
-<header>
-🍎 فواكه
-</header>
+<header>🍎 فواكه</header>
 
-<!-- سلة المنتجات في الصفحة الرئيسية -->
-<div class="cart" id="cart">
-🛒 سلة: <span id="cart-count">0</span> منتجات
-</div>
+<!-- أيقونة السلة الثابتة -->
+<div class="cart-icon" onclick="goToCart()">🛒 <span id="cart-count-header">0</span></div>
 
 <div class="container">
+
     <div class="card">
         <img src="fruit1.jpg" alt="تفاح">
         تفاح
-        <br><br>
-        <button onclick="addToCart('تفاح', 5)">أضف للسلة - 5 جنيه</button>
+        <div class="quantity">
+            <button onclick="decreaseQty(this)">-</button>
+            <span>1</span>
+            <button onclick="increaseQty(this)">+</button>
+        </div>
+        <button class="add-btn" onclick="addToCart('تفاح',5,this)">أضف للسلة - 5 جنيه</button>
     </div>
+
     <div class="card">
         <img src="fruit2.jpg" alt="موز">
         موز
-        <br><br>
-        <button onclick="addToCart('موز', 4)">أضف للسلة - 4 جنيه</button>
+        <div class="quantity">
+            <button onclick="decreaseQty(this)">-</button>
+            <span>1</span>
+            <button onclick="increaseQty(this)">+</button>
+        </div>
+        <button class="add-btn" onclick="addToCart('موز',4,this)">أضف للسلة - 4 جنيه</button>
     </div>
+
     <div class="card">
         <img src="fruit3.jpg" alt="برتقال">
         برتقال
-        <br><br>
-        <button onclick="addToCart('برتقال', 6)">أضف للسلة - 6 جنيه</button>
+        <div class="quantity">
+            <button onclick="decreaseQty(this)">-</button>
+            <span>1</span>
+            <button onclick="increaseQty(this)">+</button>
+        </div>
+        <button class="add-btn" onclick="addToCart('برتقال',6,this)">أضف للسلة - 6 جنيه</button>
     </div>
+
     <div class="card">
         <img src="fruit4.jpg" alt="عنب">
         عنب
-        <br><br>
-        <button onclick="addToCart('عنب', 7)">أضف للسلة - 7 جنيه</button>
+        <div class="quantity">
+            <button onclick="decreaseQty(this)">-</button>
+            <span>1</span>
+            <button onclick="increaseQty(this)">+</button>
+        </div>
+        <button class="add-btn" onclick="addToCart('عنب',7,this)">أضف للسلة - 7 جنيه</button>
     </div>
+
 </div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// فتح صفحة السلة
+function goToCart(){ window.location.href = 'cart.html'; }
+
+// تعديل الكمية
+function increaseQty(el){
+    let span = el.parentElement.querySelector('span');
+    span.innerText = parseInt(span.innerText)+1;
+}
+function decreaseQty(el){
+    let span = el.parentElement.querySelector('span');
+    if(parseInt(span.innerText)>1) span.innerText = parseInt(span.innerText)-1;
+}
+
+// إضافة للسلة مع الكمية
+function addToCart(name, price, btn){
+    let qty = parseInt(btn.previousElementSibling.querySelector('span').innerText);
+    // إذا المنتج موجود مسبقًا، نجمع الكمية
+    let index = cart.findIndex(p => p.name === name);
+    if(index !== -1){
+        cart[index].qty += qty;
+    } else {
+        cart.push({name:name, price:price, qty:qty});
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartHeader();
+    alert(name+" تم إضافته للسلة ("+qty+")");
+}
+
+// تحديث أيقونة السلة
+function updateCartHeader(){
+    let total = 0;
+    cart.forEach(p => total += p.qty);
+    document.getElementById('cart-count-header').innerText = total;
+}
+
+// عند تحميل الصفحة
+updateCartHeader();
+</script>
 
 </body>
 </html>
