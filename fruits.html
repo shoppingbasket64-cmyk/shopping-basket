@@ -43,31 +43,80 @@ header{
     border-radius:10px;
     margin-bottom:10px;
 }
-</style>
-</head>
 
+/* زر الإضافة */
+button{
+    padding:8px 15px;
+    border:none;
+    border-radius:8px;
+    background:#0d6efd;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#08306b;
+}
+</style>
+
+<script>
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+// تحديث عدد المنتجات
+function updateCartCount(){
+    const countElem = document.getElementById('cart-count');
+    if(countElem) countElem.innerText = cart.length;
+}
+
+// إضافة منتج للسلة مع السعر
+function addToCart(name, price){
+    cart.push({name:name, price:price});
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    alert(name + " تم إضافته للسلة بسعر " + price + " جنيه!");
+}
+
+updateCartCount();
+</script>
+
+</head>
 <body>
 
 <header>
 🍎 فواكه
 </header>
 
+<!-- سلة المنتجات في الصفحة الرئيسية -->
+<div class="cart" id="cart">
+🛒 سلة: <span id="cart-count">0</span> منتجات
+</div>
+
 <div class="container">
     <div class="card">
         <img src="fruit1.jpg" alt="تفاح">
         تفاح
+        <br><br>
+        <button onclick="addToCart('تفاح', 5)">أضف للسلة - 5 جنيه</button>
     </div>
     <div class="card">
         <img src="fruit2.jpg" alt="موز">
         موز
+        <br><br>
+        <button onclick="addToCart('موز', 4)">أضف للسلة - 4 جنيه</button>
     </div>
     <div class="card">
         <img src="fruit3.jpg" alt="برتقال">
         برتقال
+        <br><br>
+        <button onclick="addToCart('برتقال', 6)">أضف للسلة - 6 جنيه</button>
     </div>
     <div class="card">
         <img src="fruit4.jpg" alt="عنب">
         عنب
+        <br><br>
+        <button onclick="addToCart('عنب', 7)">أضف للسلة - 7 جنيه</button>
     </div>
 </div>
 
