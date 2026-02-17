@@ -15,6 +15,24 @@ header{background:#0d6efd;color:white;padding:15px;font-size:22px;}
 .quantity span{min-width:30px;display:inline-block;font-size:16px;}
 .add-btn{margin-top:10px;padding:8px 15px;border:none;border-radius:8px;background:#198754;color:white;font-weight:bold;cursor:pointer;}
 .cart-icon{position:fixed;top:10px;right:10px;background:#ffc107;padding:10px 15px;border-radius:50px;cursor:pointer;font-weight:bold;box-shadow:0 3px 6px rgba(0,0,0,0.2);}
+#toast{
+  visibility:hidden;
+  min-width:220px;
+  background:#2e7d32;
+  color:#fff;
+  text-align:center;
+  border-radius:10px;
+  padding:12px;
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:9999;
+}
+
+#toast.show{
+  visibility:visible;
+}
 </style>
 </head>
 <body>
@@ -55,7 +73,15 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
 function goToCart(){ window.location.href='cart.html'; }
 function increaseQty(el){ let span=el.parentElement.querySelector('span'); span.innerText=parseInt(span.innerText)+1; }
 function decreaseQty(el){ let span=el.parentElement.querySelector('span'); if(parseInt(span.innerText)>1) span.innerText=parseInt(span.innerText)-1; }
+function showToast(message){
+    let toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.className = "show";
 
+    setTimeout(()=>{
+        toast.className = "";
+    },2300);
+  }
 function addToCart(name, price, btn){
     let qty=parseInt(btn.previousElementSibling.querySelector('span').innerText);
     if(isNaN(qty)||qty<1) qty=1;
@@ -63,12 +89,13 @@ function addToCart(name, price, btn){
     if(index!==-1){cart[index].qty+=qty;}else{cart.push({name:name,price:price,qty:qty});}
     localStorage.setItem('cart',JSON.stringify(cart));
     updateCartHeader();
-    alert(name+" تم إضافته للسلة ("+qty+")");
+    showToast(name+" تم إضافته للسلة ("+qty+")");
 }
 
 function updateCartHeader(){let total=0;cart.forEach(p=>total+=p.qty);document.getElementById('cart-count-header').innerText=total;}
 updateCartHeader();
 </script>
-
+  
+<div id="toast"></div>
 </body>
 </html>
