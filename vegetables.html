@@ -52,23 +52,59 @@ header{background:#0d6efd;color:white;padding:15px;font-size:22px;}
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-function goToCart(){ window.location.href='cart.html'; }
-function increaseQty(el){ let span=el.parentElement.querySelector('span'); span.innerText=parseInt(span.innerText)+1; }
-function decreaseQty(el){ let span=el.parentElement.querySelector('span'); if(parseInt(span.innerText)>1) span.innerText=parseInt(span.innerText)-1; }
-
-function addToCart(name, price, btn){
-    let qty=parseInt(btn.previousElementSibling.querySelector('span').innerText);
-    if(isNaN(qty)||qty<1) qty=1;
-    let index=cart.findIndex(p=>p.name===name);
-    if(index!==-1){cart[index].qty+=qty;}else{cart.push({name:name,price:price,qty:qty});}
-    localStorage.setItem('cart',JSON.stringify(cart));
-    updateCartHeader();
-    alert(name+" تم إضافته للسلة ("+qty+")");
+function goToCart(){ 
+    window.location.href='cart.html'; 
 }
 
-function updateCartHeader(){let total=0;cart.forEach(p=>total+=p.qty);document.getElementById('cart-count-header').innerText=total;}
+function increaseQty(el){ 
+    let span = el.parentElement.querySelector('span'); 
+    span.innerText = parseInt(span.innerText) + 1; 
+}
+
+function decreaseQty(el){ 
+    let span = el.parentElement.querySelector('span'); 
+    if(parseInt(span.innerText) > 1) 
+        span.innerText = parseInt(span.innerText) - 1; 
+}
+
+/* رسالة احترافية */
+function showToast(message){
+    let toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.className = "show";
+
+    setTimeout(()=>{
+        toast.className = "";
+    },2300);
+}
+
+function addToCart(name, price, btn){
+    let qty = parseInt(btn.previousElementSibling.querySelector('span').innerText);
+    if(isNaN(qty)||qty<1) qty=1;
+
+    let index = cart.findIndex(p=>p.name===name);
+
+    if(index!==-1){
+        cart[index].qty += qty;
+    }else{
+        cart.push({name:name,price:price,qty:qty});
+    }
+
+    localStorage.setItem('cart',JSON.stringify(cart));
+    updateCartHeader();
+
+    /* بدل alert */
+    showToast(name+" تم إضافته للسلة ("+qty+")");
+}
+
+function updateCartHeader(){
+    let total=0;
+    cart.forEach(p=>total+=p.qty);
+    document.getElementById('cart-count-header').innerText=total;
+}
+
 updateCartHeader();
-</script>
+      </script>
 
 </body>
 </html>
