@@ -3,95 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تسالي - سلة ماركت</title>
-<link rel="stylesheet" href="style.css">
+<title>تسالي - Shopping Basket</title>
+<style>
+body{margin:0;font-family:Tahoma,sans-serif;background:#f5f5f5;text-align:center;}
+header{background:#0d6efd;color:white;padding:15px;font-size:22px;}
+.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;padding:20px;}
+.card{background:white;padding:20px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.1);font-size:18px;}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:10px;}
+.quantity{display:flex;justify-content:center;align-items:center;margin-top:10px;}
+.quantity button{padding:5px 10px;margin:0 5px;border:none;border-radius:5px;background:#0d6efd;color:white;font-weight:bold;cursor:pointer;}
+.quantity span{min-width:30px;display:inline-block;font-size:16px;}
+.add-btn{margin-top:10px;padding:8px 15px;border:none;border-radius:8px;background:#198754;color:white;font-weight:bold;cursor:pointer;}
+.cart-icon{position:fixed;top:10px;right:10px;background:#ffc107;padding:10px 15px;border-radius:50px;cursor:pointer;font-weight:bold;box-shadow:0 3px 6px rgba(0,0,0,0.2);}
+#toast{visibility:hidden;min-width:220px;background:#2e7d32;color:#fff;text-align:center;border-radius:10px;padding:12px;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:9999;}
+#toast.show{visibility:visible;}
+</style>
 </head>
 <body>
 
-<!-- الهيدر مع السلة -->
-<header>
-    <h1>تسالي</h1>
-    <div class="cart-icon" onclick="goToCart()">🛒 <span id="cart-count-header">0</span></div>
-</header>
+<header>🛒 تسالي</header>
+<div class="cart-icon" onclick="goToCart()">🛒 <span id="cart-count-header">0</span></div>
 
-<!-- المنتجات -->
 <div class="container">
 
-  <div class="card">
-    <img src="chips.jpg" alt="رقائق">
-    <h3>رقائق</h3>
-    <div class="quantity">
-      <button onclick="decreaseQty(this)">-</button>
-      <span>1</span>
-      <button onclick="increaseQty(this)">+</button>
-    </div>
-    <button onclick="addToCart('رقائق', 10, this)">أضف للسلة</button>
-  </div>
+<div class="card">
+  <img src="chips.jpg" alt="رقائق">
+  رقائق
+  <div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div>
+  <button class="add-btn" onclick="addToCart('رقائق',10,this)">أضف للسلة - 10 جنيه</button>
+</div>
 
-  <div class="card">
-    <img src="chocolate.jpg" alt="شيكولاتة">
-    <h3>شيكولاتة</h3>
-    <div class="quantity">
-      <button onclick="decreaseQty(this)">-</button>
-      <span>1</span>
-      <button onclick="increaseQty(this)">+</button>
-    </div>
-    <button onclick="addToCart('شيكولاتة', 15, this)">أضف للسلة</button>
-  </div>
+<div class="card">
+  <img src="chocolate.jpg" alt="شيكولاتة">
+  شيكولاتة
+  <div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div>
+  <button class="add-btn" onclick="addToCart('شيكولاتة',15,this)">أضف للسلة - 15 جنيه</button>
+</div>
 
-  <div class="card">
-    <img src="cookies.jpg" alt="كوكيز">
-    <h3>كوكيز</h3>
-    <div class="quantity">
-      <button onclick="decreaseQty(this)">-</button>
-      <span>1</span>
-      <button onclick="increaseQty(this)">+</button>
-    </div>
-    <button onclick="addToCart('كوكيز', 12, this)">أضف للسلة</button>
-  </div>
+<div class="card">
+  <img src="cookies.jpg" alt="كوكيز">
+  كوكيز
+  <div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div>
+  <button class="add-btn" onclick="addToCart('كوكيز',12,this)">أضف للسلة - 12 جنيه</button>
+</div>
 
-  <div class="card">
-    <img src="nuts.jpg" alt="مكسرات">
-    <h3>مكسرات</h3>
-    <div class="quantity">
-      <button onclick="decreaseQty(this)">-</button>
-      <span>1</span>
-      <button onclick="increaseQty(this)">+</button>
-    </div>
-    <button onclick="addToCart('مكسرات', 20, this)">أضف للسلة</button>
-  </div>
+<div class="card">
+  <img src="nuts.jpg" alt="مكسرات">
+  مكسرات
+  <div class="quantity"><button onclick="decreaseQty(this)">-</button><span>1</span><button onclick="increaseQty(this)">+</button></div>
+  <button class="add-btn" onclick="addToCart('مكسرات',20,this)">أضف للسلة - 20 جنيه</button>
+</div>
 
 </div>
 
-<!-- التوست -->
 <div id="toast"></div>
 
-<!-- JS السلة -->
 <script>
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
 function goToCart(){ window.location.href='cart.html'; }
 function increaseQty(el){ let span=el.parentElement.querySelector('span'); span.innerText=parseInt(span.innerText)+1; }
 function decreaseQty(el){ let span=el.parentElement.querySelector('span'); if(parseInt(span.innerText)>1) span.innerText=parseInt(span.innerText)-1; }
-
-function showToast(message){
-    let toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.className = "show";
-    setTimeout(()=>{ toast.className = ""; },2300);
-}
-
-function addToCart(name, price, btn){
-    let qty=parseInt(btn.previousElementSibling.querySelector('span').innerText);
-    if(isNaN(qty)||qty<1) qty=1;
-    let index=cart.findIndex(p=>p.name===name);
-    if(index!==-1){cart[index].qty+=qty;}else{cart.push({name:name,price:price,qty:qty});}
-    localStorage.setItem('cart',JSON.stringify(cart));
-    updateCartHeader();
-    showToast(name+" تم إضافته للسلة ("+qty+")");
-}
-
-function updateCartHeader(){let total=0;cart.forEach(p=>total+=p.qty);document.getElementById('cart-count-header').innerText=total;}
+function showToast(message){ let toast=document.getElementById("toast"); toast.innerText=message; toast.className="show"; setTimeout(()=>{toast.className="";},2300); }
+function addToCart(name, price, btn){ let qty=parseInt(btn.previousElementSibling.querySelector('span').innerText); if(isNaN(qty)||qty<1) qty=1; let index=cart.findIndex(p=>p.name===name); if(index!==-1){cart[index].qty+=qty;}else{cart.push({name:name,price:price,qty:qty});} localStorage.setItem('cart',JSON.stringify(cart)); updateCartHeader(); showToast(name+" تم إضافته للسلة ("+qty+")"); }
+function updateCartHeader(){let total=0; cart.forEach(p=>total+=p.qty); document.getElementById('cart-count-header').innerText=total;}
 updateCartHeader();
 </script>
 
