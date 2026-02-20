@@ -1,57 +1,195 @@
-/* خلفية الموقع */
+/* --------------------------- */
+/* عام للجميع */
 body{
-    background:#f5f5f5;
-    font-family: Arial, sans-serif;
     margin:0;
-    padding:0;
-    direction: rtl;
+    font-family: 'Tahoma', sans-serif;
+    background:#f8f9fa;
+    color:#333;
 }
 
-/* الحاوية بتاعة الأقسام */
-.categories{
-    display:grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap:20px;
+/* --------------------------- */
+/* الهيدر */
+header{
+    background:#198754;
+    color:white;
     padding:20px;
+    font-size:24px;
+    font-weight:bold;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
 }
 
-/* شكل كارت القسم */
-.category-card{
-    background:#ffffff;
-    border-radius:22px;
-    padding:15px;
-    text-align:center;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    transition:0.3s;
+header .cart-icon{
+    background:#ffc107;
+    color:black;
+    padding:8px 15px;
+    border-radius:15px;
     cursor:pointer;
+    display:flex;
+    align-items:center;
 }
 
-/* حركة عند اللمس */
-.category-card:hover{
-    transform:translateY(-6px);
+header .cart-icon span{
+    margin-left:5px;
+    font-weight:bold;
 }
 
-/* صورة القسم */
-.category-card img{
+/* --------------------------- */
+/* بانر الصورة */
+.banner{
+    width: 95%;
+    max-width: 1000px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.banner img{
+    width: 100%;
+    height: auto;
+    display:block;
+}
+
+/* --------------------------- */
+/* الأقسام */
+.categories-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 95%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.category{
+    width: 48%;
+    margin-bottom:20px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow:0 3px 12px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition: 0.3s;
+    background:white;
+}
+
+.category:hover{
+    transform: translateY(-5px);
+}
+
+.category img{
+    width:100%;
+    height:180px;
+    object-fit: cover;
+}
+
+.category h2{
+    text-align:center;
+    font-size:20px;
+    padding:10px 0;
+}
+
+/* --------------------------- */
+/* المنتجات */
+.products-container{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 95%;
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.product{
+    width: 48%;
+    margin-bottom:20px;
+    padding: 12px;
+    border-radius: 15px;
+    background:white;
+    box-shadow:0 3px 12px rgba(0,0,0,0.1);
+    transition:0.3s;
+}
+
+.product:hover{
+    transform: translateY(-5px);
+}
+
+.product img{
     width:100%;
     height:150px;
-    object-fit:cover;
-    border-radius:18px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
-/* اسم القسم */
-.category-card h3{
-    margin-top:12px;
-    font-size:18px;
-    font-weight:bold;
-    color:#222;
+.product h3{
+    font-size:16px;
+    margin:8px 0;
+    text-align:center;
 }
 
-/* زرار السلة */
-.cart-icon{
-    background:#ffc107;
-    color:#000;
-    padding:8px 18px;
-    border-radius:30px;
-    font-weight:bold;
+.product .qty{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.product .qty button{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+    margin:0 5px;
+    transition:0.2s;
+}
+
+.product .qty button:hover{
+    background:#084298;
+}
+
+.product button.add-cart{
+    background:#198754;
+    color:white;
+    border:none;
+    width:100%;
+    padding:8px;
+    border-radius:10px;
+    font-size:14px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.product button.add-cart:hover{
+    background:#146c43;
+}
+
+/* --------------------------- */
+/* الفوتر */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#333;
+    color:white;
+    margin-top:40px;
+}
+
+/* --------------------------- */
+/* متوافق مع الموبايل */
+@media screen and (max-width:600px){
+    .category, .product{
+        width:100%;
+    }
+
+    header{
+        flex-direction: column;
+        align-items:flex-start;
+    }
+
+    header .cart-icon{
+        margin-top:10px;
+    }
 }
