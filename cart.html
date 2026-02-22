@@ -13,6 +13,18 @@ button{padding:5px 10px;border:none;border-radius:5px;background:red;color:white
 strong{display:block;margin-top:20px;font-size:20px;}
 input{margin:5px 0;padding:8px;width:250px;border-radius:5px;border:1px solid #ccc;}
 #whatsapp-btn{margin-top:15px;padding:10px 20px;background:#25D366;color:white;border:none;border-radius:8px;font-weight:bold;cursor:pointer;}
+
+/* الرسالة الحمراء للحقول الفاضية */
+.error-message{
+    background: #ff4d4d;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    display: none;
+    text-align: center;
+}
 </style>
 </head>
 <body>
@@ -26,6 +38,9 @@ input{margin:5px 0;padding:8px;width:250px;border-radius:5px;border:1px solid #c
 <input type="text" id="customer-name" placeholder="الاسم الكامل"><br>
 <input type="text" id="customer-address" placeholder="العنوان"><br>
 <input type="text" id="customer-phone" placeholder="رقم التليفون"><br>
+
+<!-- الرسالة الحمراء -->
+<p id="error-message" class="error-message"></p>
 
 <button id="whatsapp-btn">📲 طلب عبر واتساب</button>
 
@@ -74,12 +89,17 @@ whatsappBtn.addEventListener('click', ()=>{
     const name = document.getElementById('customer-name').value.trim();
     const address = document.getElementById('customer-address').value.trim();
     const phone = document.getElementById('customer-phone').value.trim();
-    
+    const error = document.getElementById("error-message");
+
+    // لو أي حقل فاضي نعرض الرسالة الحمراء
     if(!name || !address || !phone){
-        alert("من فضلك املأ جميع بياناتك!");
+        error.style.display = "block";
+        error.innerText = "من فضلك املأ جميع بياناتك";
         return;
+    } else {
+        error.style.display = "none";
     }
-    
+        
     // تكوين الرسالة
     let msg = `مرحبًا، أود طلب هذه المنتجات:%0A`;
     let total = 0;
