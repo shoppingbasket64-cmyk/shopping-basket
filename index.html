@@ -69,17 +69,18 @@ header{
 }
 
 /* --------------------------- */
-/* Grid الكروت 2x2 */
-.container{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:25px;
+/* الصفوف */
+.row{
+    display:flex;
+    justify-content:space-between;
     width:90%;
     max-width:900px;
-    margin:30px auto;
+    margin:20px auto;
+    gap:20px;
 }
 
 .card{
+    flex:1;
     background:white;
     padding:20px;
     border-radius:20px;
@@ -130,11 +131,11 @@ header{
 }
 
 /* --------------------------- */
-/* متوافق مع الموبايل */
+/* موبايل */
 @media screen and (max-width:600px){
-    .container{
-        grid-template-columns:1fr;
-        gap:20px;
+    .row{
+        flex-direction:column;
+        gap:15px;
     }
     .card img{
         width:100px;
@@ -154,22 +155,23 @@ header{
     <img src="imagesbanner.png" alt="بانر الصفحة الرئيسية">
 </div>
 
-<div class="container">
+<!-- --------------------------- -->
+<div class="row">
   <div class="card" onclick="goToPage('fruits.html')">
     <img src="fruit-icon.png" alt="فواكه">
     <h3>فواكه</h3>
   </div>
-
   <div class="card" onclick="goToPage('vegetables.html')">
     <img src="vegetable-icon.png" alt="خضروات">
     <h3>خضروات</h3>
   </div>
+</div>
 
+<div class="row">
   <div class="card" onclick="goToPage('grocery.html')">
     <img src="grocery-icon.png" alt="بقالة">
     <h3>بقالة</h3>
   </div>
-
   <div class="card" onclick="goToPage('snacks.html')">
     <img src="snacks-icon.png" alt="تسالي">
     <h3>تسالي</h3>
