@@ -95,80 +95,101 @@ header .cart-icon span{
 }
 
 /* --------------------------- */
-/* المنتجات */
-.products-container{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 95%;
-    max-width: 1000px;
-    margin: 20px auto;
+/* المنتجات (Grid جديد للـ cards) */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
 }
 
-.product{
-    width:45%;
-    margin-bottom:15px;
-    padding:10px;
-    border-radius:12px;
-    background:white;
-    box-shadow:0 3px 12px rgba(0,0,0,0.1);
-    transition:0.3s;
+.card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.product:hover{
+.card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
-.product img{
-    width:100%;
-    height:120px;
-    object-fit: cover;
-    border-radius: 10px;
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    border-radius: 8px;
 }
 
-.product h3{
-    font-size:15px;
-    margin:8px 0;
-    text-align:center;
+.card h3 {
+    font-size: 18px;
+    margin: 10px 0 5px 0;
+    color: #333;
 }
 
-.product .qty{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin-bottom:8px;
+.card .price {
+    font-size: 16px;
+    color: #2e7d32;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-.product .qty button{
-    background:#0d6efd;
-    color:white;
-    border:none;
-    padding:5px 10px;
-    border-radius:8px;
-    font-size:13px;
-    cursor:pointer;
-    margin:0 5px;
-    transition:0.2s;
+.add-btn {
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
 }
 
-.product .qty button:hover{
-    background:#084298;
+.add-btn:hover {
+    background-color: #084298;
 }
 
-.product button.add-cart{
-    background:#198754;
-    color:white;
-    border:none;
-    width:100%;
-    padding:6px 12px;
-    border-radius:10px;
-    font-size:13px;
-    cursor:pointer;
-    transition:0.3s;
+.quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.product button.add-cart:hover{
-    background:#146c43;
+.quantity button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.quantity button:hover {
+    background-color: #dcdcdc;
+}
+
+.quantity span {
+    min-width: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 28px;
+    margin: 30px 0 20px 0;
+    color: #2e7d32;
+    font-weight: bold;
 }
 
 /* --------------------------- */
@@ -184,7 +205,7 @@ footer{
 /* --------------------------- */
 /* متوافق مع الموبايل */
 @media screen and (max-width:600px){
-    .category, .product{
+    .category, .product, .card{
         width:100%;
     }
 
