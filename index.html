@@ -69,41 +69,42 @@ header{
 }
 
 /* --------------------------- */
-/* أقسام */
+/* Grid الكروت */
 .container{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:20px;
-    width:95%;
-    max-width:1000px;
-    margin:20px auto;
+    grid-template-columns:repeat(2, 1fr);
+    gap:25px;
+    width:90%;
+    max-width:900px;
+    margin:30px auto;
 }
 
 .card{
     background:white;
-    padding:15px;
-    border-radius:15px;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
     text-align:center;
     cursor:pointer;
     transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-5px) scale(1.05);
-    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    transform:scale(1.05) translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
 .card img{
-    width:100px;
-    height:100px;
+    width:120px;
+    height:120px;
     object-fit:contain;
-    margin-bottom:10px;
+    margin-bottom:15px;
 }
 
 .card h3{
-    font-size:18px;
-    margin:5px 0;
+    font-size:20px;
+    font-weight:bold;
+    margin:0;
 }
 
 /* --------------------------- */
@@ -111,15 +112,16 @@ header{
 .fb-btn{
     display:block;
     width:90%;
-    max-width:300px;
-    margin:20px auto 40px auto;
-    padding:12px;
+    max-width:400px;
+    margin:30px auto 50px auto;
+    padding:15px;
     background:#1877f2;
     color:white;
     text-decoration:none;
-    border-radius:10px;
+    border-radius:12px;
     font-weight:bold;
     text-align:center;
+    font-size:18px;
     transition:0.3s;
 }
 
@@ -132,6 +134,11 @@ header{
 @media screen and (max-width:600px){
     .container{
         grid-template-columns:1fr;
+        gap:20px;
+    }
+    .card img{
+        width:100px;
+        height:100px;
     }
 }
 </style>
